@@ -1,5 +1,6 @@
 # a4-megkiilina
 a4-megkiilina created by GitHub Classroom
+## See the site at https://6859-sp21.github.io/a4-megkiilina/
 
 instructions:
 1. clone your own copy of the repo
