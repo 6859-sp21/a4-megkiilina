@@ -25,6 +25,7 @@ h1{
 
 #sections{
   width: 340px;
+  padding-top: 100px;
 }
 
 #sections > div{
@@ -33,7 +34,7 @@ h1{
   margin-bottom: 200px;
 }
 #sections > div:last-child{
-  margin-bottom: 30px;
+  margin-bottom: 90px;
 }
 #sections > div.graph-scroll-active{
   opacity: 1;
@@ -41,6 +42,7 @@ h1{
 
 #graph{
   margin-left: 40px;
+  padding-top:100px;
   width: 500px;
   position: -webkit-sticky;
   position: sticky;
@@ -105,20 +107,18 @@ svg{
   <div id='graph'></div>
   <div id='sections'>
     <div>
-      <h3>Connect text and graphics</h3>
-      <span class='mono'>graph-scroll</span>
-      takes a selection of explanatory text sections and dispatches <span class='mono'>active</span> events as different sections are scrolled into to view. These active events are used to update a graph's state.
-      <pre>
-d3.graphScroll()
-  .sections(d3.selectAll('#sections > div'))
-  .on('active', function(i){
-    console.log(i + 'th section active') })
-      </pre>
+      <h3>This is Section 1 and Graph 1</h3>
+     Here's the text for Section 1.
 
+        There are a few things that go here.
+        <ul>
+            <li> Hello world</li>
+            <li> This is another item.</li>
+        </ul>
     </div>
 
     <div>
-      <h3>Highlight active text</h3>
+      <h3>This is another section. </h3>
       The top most text section scrolled into view is classed <span class='mono'>graph-scroll-active</span>. This makes it easy to highlight the active section with css:
       <pre>
 #sections > div{
@@ -133,7 +133,7 @@ d3.graphScroll()
 
 
     <div>
-      <h3>Headers and footers</h3>
+      <h3>Wahoo, this is Section 3 of Graph 1</h3>
       To support headers and intro images/text, the explanatory text and graphic are wrapped with a container element:
       <pre>
 &lt;h1&gt;Page Title&lt;/div&gt;
@@ -158,7 +158,7 @@ d3.graphScroll()
     </div>
 
     <div>
-      <h3>Sticky graph</h3>
+      <h3>This is the last section of Graph 1.</h3>
       When the graph starts to scroll out of view, <span class='mono'>postiion: sticky</span> keeps the graph element stuck to the top of the page while the text scrolls by.
       <pre>
 #container{
@@ -179,8 +179,28 @@ d3.graphScroll()
 </pre>
     </div>
 
+    <div></div> <!-- this is a placeholder to keep the graph in place -->
+
   </div>
 
+</div>
+
+<h2> Amazing, another graph</h2>
+
+<div id='container' class='container-2'>
+    <div id='graph'></div>
+    <div id='sections'>
+        <div>
+            <h3>This is Section 1 of Graph 2.</h3>
+            Here's the text for Section 1.
+
+            There are a few things that go here.
+            <ul>
+                <li> Hello world</li>
+                <li> This is another item.</li>
+            </ul>
+        </div>
+    </div>
 </div>
 
 <div style="height:300px"> </div>
@@ -249,6 +269,7 @@ function render(){
       .graph(d3.selectAll('.container-2 #graph'))
       .eventId('uniqueId2')  // namespace for scroll and resize events
       .sections(d3.selectAll('.container-2 #sections > div'))
+      // Below, the i passed into the fn is the index of the active section!=
       .on('active', function(i){
         var h = height
         var w = width

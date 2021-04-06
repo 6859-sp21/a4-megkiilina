@@ -281,7 +281,7 @@ function render(){
       .graph(d3.selectAll('container-1 #graph'))
       .eventId('uniqueId1')  // namespace for scroll and resize events
       .sections(d3.selectAll('.container-1 #sections > div'))
-      // .offset(innerWidth < 900 ? innerHeight - 30 : 200)
+          // Below, the i passed into the fn is the index of the active section!
       .on('active', function(i){
         var pos = [ {cx: width - r, cy: r},
                     {cx: r,         cy: r},
