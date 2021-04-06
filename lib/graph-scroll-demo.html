@@ -25,7 +25,6 @@ h1{
 
 #sections{
   width: 340px;
-  padding-top: 100px;
 }
 
 #sections > div{
@@ -34,7 +33,7 @@ h1{
   margin-bottom: 200px;
 }
 #sections > div:last-child{
-  margin-bottom: 90px;
+  margin-bottom: 30px;
 }
 #sections > div.graph-scroll-active{
   opacity: 1;
@@ -42,7 +41,6 @@ h1{
 
 #graph{
   margin-left: 40px;
-  padding-top:100px;
   width: 500px;
   position: -webkit-sticky;
   position: sticky;
@@ -102,28 +100,29 @@ svg{
 
 </br>
 
-
 <div id='container' class='container-1'>
   <div id='graph'></div>
   <div id='sections'>
     <div>
-      <h3>This is Section 1 and Graph 1</h3>
-     Here's the text for Section 1.
+      <h3>Connect text and graphics</h3>
+      <span class='mono'>graph-scroll</span> 
+      takes a selection of explanatory text sections and dispatches <span class='mono'>active</span> events as different sections are scrolled into to view. These active events are used to update a graph's state.
+      <pre>
+d3.graphScroll()
+  .sections(d3.selectAll('#sections > div'))
+  .on('active', function(i){
+    console.log(i + 'th section active') })
+      </pre>
 
-        There are a few things that go here.
-        <ul>
-            <li> Hello world</li>
-            <li> This is another item.</li>
-        </ul>
     </div>
 
     <div>
-      <h3>This is another section. </h3>
-      The top most text section scrolled into view is classed <span class='mono'>graph-scroll-active</span>. This makes it easy to highlight the active section with css:
-      <pre>
+      <h3>Highlight active text</h3>
+      The top most text section scrolled into view is classed <span class='mono'>graph-scroll-active</span>. This makes it easy to highlight the active section with css: 
+<pre>
 #sections > div{
   opacity: .3
-}
+} 
 
 #sections div.graph-scroll-active{
   opacity: 1;
@@ -133,9 +132,9 @@ svg{
 
 
     <div>
-      <h3>Wahoo, this is Section 3 of Graph 1</h3>
-      To support headers and intro images/text, the explanatory text and graphic are wrapped with a container element:
-      <pre>
+      <h3>Headers and footers</h3>
+      To support headers and intro images/text, the explanatory text and graphic are wrapped with a container element:    
+<pre>
 &lt;h1&gt;Page Title&lt;/div&gt;
 &lt;div id='container'&gt;
   &lt;div id='graph'&gt;&lt;/div&gt;
@@ -148,9 +147,9 @@ svg{
 &lt;h1&gt;Footer&lt;/h1&gt;
 </pre>
 
-      and passed to <span class='mono'>graphScroll</span>
+    and passed to <span class='mono'>graphScroll</span>
 
-      <pre>
+<pre>
 d3.graphScroll()
   .graph(d3.select('#graph'))
   .container(d3.select('#container'))
@@ -158,9 +157,9 @@ d3.graphScroll()
     </div>
 
     <div>
-      <h3>This is the last section of Graph 1.</h3>
+      <h3>Sticky graph</h3>
       When the graph starts to scroll out of view, <span class='mono'>postiion: sticky</span> keeps the graph element stuck to the top of the page while the text scrolls by.
-      <pre>
+<pre>
 #container{
   position: relative;
 }
@@ -179,35 +178,74 @@ d3.graphScroll()
 </pre>
     </div>
 
-    <div></div> <!-- this is a placeholder to keep the graph in place -->
-
   </div>
 
 </div>
 
-<h2> Amazing, another graph</h2>
+<h1>
+  Multiple graphs work too!
+</h1>
 
 <div id='container' class='container-2'>
-    <div id='graph'></div>
-    <div id='sections'>
-        <div>
-            <h3>This is Section 1 of Graph 2.</h3>
-            Here's the text for Section 1.
+  <div id='graph'></div>
 
-            There are a few things that go here.
-            <ul>
-                <li> Hello world</li>
-                <li> This is another item.</li>
-            </ul>
-        </div>
+  <div id='sections'>
+    <div>
+      <h3>Mobile</h3>
+
+      On mobile centering the graph and sections while adding a some padding for the first slide is a good option: 
+<pre>
+@media (max-width: 925px)  {
+  #graph{
+    width: 100%;
+    transform: translate(-50%, 0);
+    margin-left: 50%;
+  }
+
+  #sections{
+    position: relative;
+    margin: 0px auto;
+    padding-top: 400px;
+  }
+}
+</pre>
     </div>
+
+    <div>
+      <h3>Examples</h3>
+      <p><a href='http://www.bloomberg.com/graphics/2015-auto-sales/'>Auto Sales</a></p>
+      <p><a href='http://www.bloomberg.com/graphics/2015-measles-outbreaks/'>Measles</a></p>
+      <p><a href='http://roadtolarissa.com/blog/2015/01/04/coloring-maps-with-d3/'>Coloring Maps</a></p>
+      <!--<p><a href='http://www.bloomberg.com/graphics/2015-fifa-scandal/'>FIFA Scandal</a></p>-->
+      <p><a href='http://www.bloomberg.com/graphics/2015-whats-warming-the-world/'>Global Warming</a></p>
+      <p><a href='http://www.bloomberg.com/politics/graphics/2015-hillary-womens-movement-timeline/'>Hillary Clinton’s Debt to Feminism
+</a></p>
+      <p><a href='http://www.bloomberg.com/graphics/year-ahead-2016/'>The Year Ahead</a></p>
+      <p><a href='http://www.bloomberg.com/graphics/2015-pace-of-social-change/'>Pace of Social Change</a></p>
+      <p><a href='http://www.bloomberg.com/graphics/2015-red-meat-cancer/'>Red Meat</a></p>
+    </div>
+
+    <div>
+      <h3>More reading</h3>
+      <p><a href='http://bost.ocks.org/mike/scroll/'>How To Scroll</a></p>
+      <p><a href='http://vallandingham.me/scroller.html/'>So You Want to Build A Scroller</a></p>
+      <p><a href='https://source.opennews.org/en-US/articles/behind-scenes-fewer-helmets-more-deaths/'>Making “Fewer Helmets, More Deaths”</a></p>
+      <p><a href='http://www.nytimes.com/interactive/2015/10/27/world/greenland-is-melting-away.html'>Greenland Is Melting Away</a></p>
+      <p><a href='http://www.theguardian.com/us-news/ng-interactive/2015/oct/19/homan-square-chicago-police-detainees'>Homan Square</a></p>
+   </div>
+
+    <div>
+      <h3>Todos</h3>
+      <p>- Simple examples
+      <p>- Self explanatory graphics
+      <p>- Swiper 
+    </div>
+  </div>
+
+
 </div>
 
-<div style="height:300px"> </div>
-
-<!-- Each 'container' div corresponds to one graph -->
-<!-- See the js at the bottom of this file for where a d3 svg is assigned to .container-1 -->
-
+<h1 id='source'><a href='https://github.com/1wheel/graph-scroll'>contribute/view source on github</a></h1>
 
 
 <script src="lib/d3v4+jetpack.js"></script>
@@ -228,6 +266,8 @@ function render(){
     height = innerHeight*.7
   }
 
+  // return console.log(width, height)
+
   var svg = d3.select('#graph').html('')
     .append('svg')
       .attrs({width: width, height: height})
@@ -236,14 +276,12 @@ function render(){
       .attrs({cx: 0, cy: 0, r: r})
 
   var colors = ['orange', 'purple', 'steelblue', 'pink', 'black']
-
-  // I'm Graph #1
   var gs = d3.graphScroll()
       .container(d3.select('.container-1'))
       .graph(d3.selectAll('container-1 #graph'))
       .eventId('uniqueId1')  // namespace for scroll and resize events
       .sections(d3.selectAll('.container-1 #sections > div'))
-      // .offset(innerWidth < 900 ? innerHeight - 30 : 200)
+          // Below, the i passed into the fn is the index of the active section!
       .on('active', function(i){
         var pos = [ {cx: width - r, cy: r},
                     {cx: r,         cy: r},
@@ -263,13 +301,11 @@ function render(){
 
   var path = svg2.append('path')
 
-  // I'm Graph #2
   var gs2 = d3.graphScroll()
       .container(d3.select('.container-2'))
       .graph(d3.selectAll('.container-2 #graph'))
       .eventId('uniqueId2')  // namespace for scroll and resize events
       .sections(d3.selectAll('.container-2 #sections > div'))
-      // Below, the i passed into the fn is the index of the active section!=
       .on('active', function(i){
         var h = height
         var w = width
