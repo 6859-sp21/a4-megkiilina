@@ -1,0 +1,153 @@
+<!doctype html>
+<head>
+  <title>A04_megkiilina</title>
+</head>
+
+<!--
+TUTORIAL
+
+make SVG responsive
+http://thenewcode.com/744/Make-SVG-Responsive
+
+SVG into liquid layout or Responsive Web Design
+http://soqr.fr/testsvg/embed-svg-liquid-layout-responsive-web-design.php
+-->
+
+<style>
+
+  .svg-container {
+    margin: 0px;
+    display: inline-block;
+    position: relative;
+    vertical-align: top;
+    background-color: black;
+    opacity: 0.9;
+  }
+  .svg-content-responsive {
+    display: inline-block;
+    position: absolute;
+    top: 10px;
+    left: 0;
+  }
+
+  /* svg .rect {
+    fill: gold;
+    stroke: steelblue;
+    stroke-width: 5px; */
+  }
+
+</style>
+<body>
+  <script src="..\lib\d3v4+jetpack.js"></script>
+  <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+  <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
+  <script src = "https://d3js.org/d3-zoom.v2.min.js"></script>  
+
+
+  <!-- Create an element where the map will take place -->
+  <div id="map-container" class="svg-container" width="1200" height="800">
+      <svg id="map" width="1000" height="800"></svg>
+  </div>
+
+  <script>
+
+  const coord = {"center": [[-6, 40], [-6, 40], [108, 36]], "scale": [1000, 1000, 1500], "rotate": [[90, 0], [90, 0], [-30, 0]]};
+  const countries = ["USA", "USA", "JPN"];
+  const colorCode = {"USA": "orange", "JPN": "green"};
+
+  let worldmap = d3.select("#map"),
+    width = +worldmap.attr("width"),
+    height = +worldmap.attr("height");
+
+  // Map and projection
+  let path = d3.geoPath();
+  let sectionIndex = 0;
+
+  // Data and color scale
+  let data = d3.map();
+  let colorScale = d3.scaleThreshold()
+    .domain([0, 2000000, 10000000, 20000000, 50000000, 200000000])
+    .range(d3.schemeGreys[9]);
+
+  // Load external data and boot
+  d3.queue()
+    .defer(d3.json, "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson")
+    .defer(d3.csv, "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world_population.csv", function(d) { data.set(d.code, +d.pop); })
+    .await(ready);
+
+
+  function ready(error, topo) {
+    // D3 projections
+    // https://sodocumentation.net/d3-js/topic/9001/d3-projections
+    let projection = d3.geoAlbers()
+      .scale(document.getElementById("map-container").offsetWidth/4)
+      .center([0,60])
+      .rotate([-20,0])
+      .parallels([65,65])
+      .translate([width/2, height/2]);
+
+    let zoomExtent = function(d) {
+      console.log(sectionIndex + 'th section active');
+
+      projection.center(coord["center"][sectionIndex]);
+      projection.scale(coord["scale"][sectionIndex]);
+      projection.rotate(coord["rotate"][sectionIndex]);
+
+      d3.selectAll("path")
+        .transition()
+        .duration(200)
+        .attr("d", d3.geoPath()
+          .projection(projection)
+        )
+        .filter(data => data.id === countries[sectionIndex])
+        .attr("fill", colorCode[countries[sectionIndex]])
+    }
+
+    let mouseOver = function(d) {
+      d3.selectAll(".Country")
+        .transition()
+        .duration(500)
+        .style("opacity", .5)
+      d3.select(this)
+        .transition()
+        .duration(200)
+        .style("stroke-width", 2)
+    }
+
+    let mouseLeave = function(d) {
+      d3.selectAll(".Country")
+        .transition()
+        .duration(200)
+        .style("opacity", .8)
+      d3.select(this)
+        .transition()
+        .duration(200)
+        .style("stroke", "transparent")
+    }
+    // Draw the map
+    worldmap.append("g")
+      .selectAll("path")
+      .data(topo.features)
+      .enter()
+      .append("path")
+      .on("click", zoomExtent)
+      // set the color of each country
+      .attr("fill", function (d) {
+        d.total = data.get(d.id) || 0;
+        return colorScale(d.total);
+      })
+      .attr("stroke", "black")
+      .attr('stroke-width', .5)
+      .attr('stroke-opacity', .8)
+      .attr("class", function(d){ return "Country" } )
+      .attr("d", d3.geoPath()
+        .projection(projection)
+      )
+      .filter(data => data.id === countries[sectionIndex])
+      .on("mouseover", mouseOver )
+      .on("mouseleave", mouseLeave )
+    }
+
+  </script>
+
+</body>
