@@ -4,19 +4,33 @@
 <style>
 
     body {
-        max-width: 900px;
+        max-width: 1000px;
         margin: 0px auto;
         font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     }
 
     h1 {
-        margin: 50px;
+        margin-top: 80px;
+        margin-bottom:50px;
+        text-align: left;
     }
 
-    h1 {
-        text-align: center;
+    #authors {
+        font-size: 12pt;
+        text-align: left;
+        margin-bottom: 20px;
+        font-weight: bold;
     }
 
+    .body-copy {
+        margin-bottom: 20px;
+
+    }
+
+    img {
+        margin-top: 40px;
+        margin-bottom: 10px;
+    }
 
     #container {
         position: relative;
@@ -33,7 +47,7 @@
 
 
     #sections {
-        width: 340px;
+        width: 500px;
         padding-top: 100px;
     }
 
@@ -52,9 +66,8 @@
     }
 
     #graph {
-        margin-left: 40px;
         padding-top: 100px;
-        width: 500px;
+        width: 300px;
         position: -webkit-sticky;
         position: sticky;
         top: 0px;
@@ -102,6 +115,7 @@
 
     svg {
         background-color: #eee;
+        margin-left: -40px;
     }
 
 </style>
@@ -112,11 +126,34 @@
 <script src="https://d3js.org/d3-zoom.v2.min.js"></script>
 
 <h1>Technology Adoption through the Fall of Communism</h1>
-<h3>
-    <div style="text-align: center;">Kii Kang, Elina Oikonomaki, Megan Prakash </br>
+<div id="authors">
+    Kii Kang, Elina Oikonomaki, Megan Prakash </br>
         6.859 Assignment 4
-    </div>
-</h3>
+</div>
+
+
+<div class="body-copy">
+    Humanity worldwide is continually developing new technology. Innovations such
+    as the telephone, TV, and internet permanently change global communication, and
+    adoption of novel technology is very disproportionate between countries.
+
+    Throughout the history of technology adoption documented in our dataset, a
+    country's GDP is strongly correlated with how quickly it is able to adopt
+    its use of a technology per capita. A particularly strong trend in the past
+    hundred years is that the world superpowers Russia, China, and the USA dominate in both GDP and technology adoption.
+
+    However, this trend is disrupted in the era of 1980-2010.
+    Scroll to see how worldwide adoption of communications technology changed
+    throughout that time.
+</div>
+
+<div style="font-size: 9pt; font-style: italic;">Dataset:
+
+    <a href="https://github.com/datasets/historical-adoption-of-technology">
+        Historical Adoption of Technology </a> with discussion
+    <a href="https://www.nber.org/system/files/working_papers/w15319/w15319.pdf">here.</a>
+</div>
+
 
 </br>
 
@@ -129,64 +166,55 @@
     </div>
     <div id='sections'>
         <div>
-            <h3>This is Section 1 and Graph 1</h3>
-            Here's the text for Section 1.
+            <h3>1876</h3>
+            <h4>Invention of the Telephone</h4>
+            1876 saw the invention of the telephone by Alexander Graham Bell in the USA, who later visited
+            Japan personally in 1877 to demonstrate the technology. [2]
+            From 1876, the USA led the world in telephone use, reaching as many as 180 million telephones in 1980
+            while the rest of the world adopted telephones much more slowly. In particular, Japan had
+            the next most telephones, at 48 million when the U.S. reached its peak.
 
-            There are a few things that go here.
-            <ul>
-                <li> Hello world</li>
-                <li> This is another item.</li>
-            </ul>
+            <i>Scroll to see how the world adopted communications technology.</i>
+
+            <img src="graph-images/08.png" style='height: 100%; width: 100%; object-fit: contain'/>
         </div>
 
         <div>
-            <h3>This is another section. </h3>
-            The top most text section scrolled into view is classed <span class='mono'>graph-scroll-active</span>. This
-            makes it easy to highlight the active section with css:
-            <pre>
-#sections > div{
-  opacity: .3
-}
-
-#sections div.graph-scroll-active{
-  opacity: 1;
-}
-</pre>
-        </div>
-
-
-        <div>
-            <h3>Wahoo, this is Section 3 of Graph 1</h3>
-            To support headers and intro images/text, the explanatory text and graphic are wrapped with a container
-            element:
-            <pre>
-&lt;h1&gt;Page Title&lt;/div&gt;
-&lt;div id='container'&gt;
-  &lt;div id='graph'&gt;&lt;/div&gt;
-  &lt;div id='sections'&gt;
-    &lt;div&gt;Section 0&lt;/div&gt;
-    &lt;div&gt;Section 1&lt;/div&gt;
-    &lt;div&gt;Section 2&lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-&lt;h1&gt;Footer&lt;/h1&gt;
-</pre>
-
-            and passed to <span class='mono'>graphScroll</span>
-
+            <h3>1896</h3>
+            <h4>Invention of the Radio</h4>
+            Radio was patented in 1896 by Guglielmo Marconi, and the world began to develop applications for
+            this novel long-range communication technology. In particular, the 1910s saw the development
+            of entertainment broadcast stations, radio communications for aircraft, and even the early stages
+            of television, using radio to broadcast images.
+            <img src="graph-images/09.png" style='height: 100%; width: 100%; object-fit: contain'/>
 
         </div>
 
         <div>
-            <h3> Section 4 Graph 1</h3>
-            There's some good information here too!
-            <ul>
-                <li> hello</li>
-            </ul>
+            <h3>1990</h3>
+            <h4>Japan and China Surge Forward with Telephones</h4>
+            China saw a massive influx of telephone acquisition in 1990,
+                coinciding with ${POLITICAL EVENT}. [3] Thus, a new trend in communications technology
+            emerged, where (detailed description of trend changes)
+            <img src="graph-images/010.png" style='height: 100%; width: 100%; object-fit: contain'/>
         </div>
 
+        <div>
+            <h3>1991</h3>
+            <h4>The Fall of the USSR</h4>
+            The fall of the USSR in 1991 causes a distinct anomaly in the trend of world superpowers dominating
+            technology acquisition. The USSR's radio usage drastically falls post-1990, coinciding with a jump
+            upwards in China's usage.
+            <img src="graph-images/013.png" style='height: 100%; width: 100%; object-fit: contain'/>
+        </div>
 
-        <div> lorem </div> <!-- this is a placeholder to keep the graph in place -->
+        <div>
+            <h3>To be continued</h3>
+            <h4>There's more data that we will organize into a more focused narrative.</h4>
+
+        </div>
+
+        <div>  </div> <!-- this is a placeholder to keep the graph in place -->
 
     </div>
 
@@ -224,13 +252,13 @@
         // var circle = svg.append('circle')
         //     .attrs({cx: 0, cy: 0, r: r})
 
-        const coord = {
-            "center": [[-6, 40], [-6, 40], [18, 36], [-6, 37]],
-            "scale": [1000, 1000, 1200, 1000],
-            "rotate": [[90, 0], [90, 0], [-120, 0], [-110, 0]]
-        };
-        const countries = ["USA", "USA", "JPN", "CHN"];
-        const colorCode = {"USA": "orange", "JPN": "green", "CHN": "red"};
+        const coord = {"center": [[-6, 40], [-6, 40], [18, 36], [21, 60], [-6, 37], [150, 90]],
+            "scale": [1000, 1000, 1200, 1200, 1000, 400],
+            "rotate": [[90, 0], [90, 0], [-120, 0], [0, 0], [-110, 0], [20, 0]]};
+
+        const countries = [["USA"], ["CHN"], ["JPN"], ["SWE", "NOR", "FIN"], ["CHN"], ["CHN", "USA"]];
+
+        const colorCode = {"USA": "pink", "CHN": "green", "JPN":"purple","FIN": "#1A4778","NOR": "#477CB6","SWE": "#2613B7"};
 
         let worldmap = d3.select("#map-svg"),
             width = +worldmap.attr("width"),
@@ -245,7 +273,7 @@
 
         // Load external data and boot
         d3.queue()
-            .defer(d3.json, "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson")
+            .defer(d3.json, "world.geojson")
             .defer(d3.csv, "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world_population.csv", function (d) {
                 data.set(d.code, +d.pop);
             })
@@ -263,7 +291,7 @@
 
             let zoomExtent = function (sectionIndex) {
                 console.log(sectionIndex + 'th section active');
-
+                if (sectionIndex === 0) return;
                 if (sectionIndex >= countries.length) return;
 
                 projection.center(coord["center"][sectionIndex]);
@@ -276,8 +304,8 @@
                     .attr("d", d3.geoPath()
                         .projection(projection)
                     )
-                    .filter(data => data.id === countries[sectionIndex])
-                    .attr("fill", colorCode[countries[sectionIndex]])
+                    .filter(data => countries[sectionIndex].includes(data.id))
+                    .attr("fill", (d, i) => {return colorCode[d.id];})
                     .style("opacity", .8)
             }
 
