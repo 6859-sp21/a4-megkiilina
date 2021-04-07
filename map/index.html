@@ -4,13 +4,16 @@
 </head>
 
 <!--
-TUTORIAL
+TUTORIALS
 
 make SVG responsive
 http://thenewcode.com/744/Make-SVG-Responsive
 
 SVG into liquid layout or Responsive Web Design
 http://soqr.fr/testsvg/embed-svg-liquid-layout-responsive-web-design.php
+
+tooltip
+https://www.d3-graph-gallery.com/graph/interactivity_tooltip.htm
 -->
 
 <style>
@@ -37,16 +40,20 @@ http://soqr.fr/testsvg/embed-svg-liquid-layout-responsive-web-design.php
 
   <script>
 
-  const coord = {"center": [[-6, 40], [-6, 40], [18, 36], [-6, 37]], "scale": [1000, 1000, 1200, 1000], "rotate": [[90, 0], [90, 0], [-120, 0], [-110, 0]]};
-  const countries = ["USA", "USA", "JPN", "CHN"];
-  const colorCode = {"USA": "orange", "JPN": "green", "CHN": "red"};
+  const coord = {"center": [[-6, 40], [-6, 40], [18, 36], [21, 60], [-6, 37], [150, 90]],
+                 "scale": [1000, 1000, 1200, 1200, 1000, 400],
+                 "rotate": [[90, 0], [90, 0], [-120, 0], [0, 0], [-110, 0], [20, 0]]};
+
+  const countries = [["USA"], ["USA"], ["JPN"], ["SWE", "NOR", "FIN"], ["CHN"], ["CHN", "USA"]];
+
+  const colorCode = {"USA": "pink", "CHN": "green", "JPN":"purple","FIN": "#1A4778","NOR": "#477CB6","SWE": "#2613B7"};
 
   let worldmap = d3.select("#map"),
     width = +worldmap.attr("width"),
     height = +worldmap.attr("height");
 
   let path = d3.geoPath();
-  let sectionIndex = 2;
+  let sectionIndex = 3;
 
   let data = d3.map();
   let colorScale = d3.scaleThreshold()
@@ -55,7 +62,7 @@ http://soqr.fr/testsvg/embed-svg-liquid-layout-responsive-web-design.php
 
   // Load external data and boot
   d3.queue()
-    .defer(d3.json, "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson")
+    .defer(d3.json, "../world.geojson")
     .defer(d3.csv, "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world_population.csv", function(d) { data.set(d.code, +d.pop); })
     .await(ready);
 
@@ -83,8 +90,8 @@ http://soqr.fr/testsvg/embed-svg-liquid-layout-responsive-web-design.php
         .attr("d", d3.geoPath()
           .projection(projection)
         )
-        .filter(data => data.id === countries[sectionIndex])
-        .attr("fill", colorCode[countries[sectionIndex]])
+        .filter(data => countries[sectionIndex].includes(data.id))
+        .attr("fill", (d, i) => {return colorCode[d.id];})
         .style("opacity", .8)
     }
 
@@ -126,13 +133,13 @@ http://soqr.fr/testsvg/embed-svg-liquid-layout-responsive-web-design.php
       })
       .attr("stroke", "white")
       .attr('stroke-width', .1)
-      .attr("class", function(d){ return "Country" } )
+      .attr("class", d => { return "Country" } )
       .attr("d", d3.geoPath()
         .projection(projection)
       )
-      .filter(data => data.id === countries[sectionIndex])
-      .on("mouseover", mouseOver )
-      .on("mouseleave", mouseLeave )
+      .filter(data => countries[sectionIndex].includes(data.id))
+      .on("mouseover", mouseOver)
+      .on("mouseleave", mouseLeave)
     }
 
   </script>
