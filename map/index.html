@@ -23,18 +23,6 @@ http://soqr.fr/testsvg/embed-svg-liquid-layout-responsive-web-design.php
     /* background-color: black; */
     opacity: 0.85;
   }
-  .svg-content-responsive {
-    display: inline-block;
-    position: absolute;
-    top: 10px;
-    left: 0;
-  }
-
-  /* svg .rect {
-    fill: gold;
-    stroke: steelblue;
-    stroke-width: 5px; */
-  }
 
 </style>
 <body>
@@ -43,8 +31,6 @@ http://soqr.fr/testsvg/embed-svg-liquid-layout-responsive-web-design.php
   <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
   <script src = "https://d3js.org/d3-zoom.v2.min.js"></script>  
 
-
-  <!-- Create an element where the map will take place -->
   <div id="map-container" class="svg-container" width="1000" height="800">
       <svg id="map" width="1000" height="800"></svg>
   </div>
@@ -59,11 +45,9 @@ http://soqr.fr/testsvg/embed-svg-liquid-layout-responsive-web-design.php
     width = +worldmap.attr("width"),
     height = +worldmap.attr("height");
 
-  // Map and projection
   let path = d3.geoPath();
   let sectionIndex = 2;
 
-  // Data and color scale
   let data = d3.map();
   let colorScale = d3.scaleThreshold()
     .domain([0, 2000000, 10000000, 30000000, 50000000, 200000000])
