@@ -44,9 +44,21 @@ d3.csv("data.csv",
   function(data) {
 
     // Filter data based on Country ////////////////////
-    const country = "Sweden";
-    const filt_data = data.filter(function(d) {return d.country == "Sweden"})
-    console.log(filt_data);
+
+    var countries = ["United States","China","Japan","Finland","Norway","Sweden"];
+
+
+    let color_countries = {"United States": "pink", "China": "blue","Japan":"purple","Finland":"green","Norway":"grey","Sweden":"orange"};
+
+    // const country = "Italy";
+    const data_US = data.filter(function(d) {return d.country === countries[0]}),
+          data_china = data.filter(function(d) {return d.country === countries[1]}),
+          data_japan = data.filter(function(d) {return d.country === countries[2]}),
+          data_fin = data.filter(function(d) {return d.country === countries[3]}),
+          data_norw = data.filter(function(d) {return d.country === countries[4]}),
+          data_swed = data.filter(function(d) {return d.country === countries[5]})
+          
+    console.log(data_US);
 
     // Add X axis --> it is a date formatdate
 
@@ -101,23 +113,80 @@ d3.csv("data.csv",
 
     // Add the line //////////////////////////////////
     svg.append("path")
-      .datum(filt_data)
+      .datum(data_US)
       .attr("fill", "none")
-      .attr("stroke", "#34a886")
-      .attr("stroke-width", 5.5)
+      .attr("stroke", color_countries[countries[0]])
+      .attr("stroke-width", 1.5)
       .attr("d", d3.line()
         .x(function(d) { return x(d.year) })
         .y(function(d) { return y(d.cellphone) })
-        )
+        );
+
+    svg.append("path")
+      .datum(data_china)
+      .attr("fill", "none")
+      .attr("stroke", color_countries[countries[1]])
+      .attr("stroke-width", 1.5)
+      .attr("d", d3.line()
+        .x(function(d) { return x(d.year) })
+        .y(function(d) { return y(d.cellphone) })
+        );
+
+    svg.append("path")
+      .datum(data_japan)
+      .attr("fill", "none")
+      .attr("stroke", color_countries[countries[2]])
+      .attr("stroke-width", 1.5)
+      .attr("d", d3.line()
+        .x(function(d) { return x(d.year) })
+        .y(function(d) { return y(d.cellphone) })
+        );
+
+
+    svg.append("path")
+      .datum(data_fin)
+      .attr("fill", "none")
+      .attr("stroke", color_countries[countries[3]])
+      .attr("stroke-width", 1.5)
+      .attr("d", d3.line()
+        .x(function(d) { return x(d.year) })
+        .y(function(d) { return y(d.cellphone) })
+        );
+
+    svg.append("path")
+      .datum(data_norw)
+      .attr("fill", "none")
+      .attr("stroke", color_countries[countries[4]])
+      .attr("stroke-width", 1.5)
+      .attr("d", d3.line()
+        .x(function(d) { return x(d.year) })
+        .y(function(d) { return y(d.cellphone) })
+        );
+
+    svg.append("path")
+      .datum(data_swed)
+      .attr("fill", "none")
+      .attr("stroke", color_countries[countries[5]])
+      .attr("stroke-width", 1.5)
+      .attr("d", d3.line()
+        .x(function(d) { return x(d.year) })
+        .y(function(d) { return y(d.cellphone) })
+        );
+
+ 
+
+    //d3.selectAll("path")
+      //.attr("stroke", d => {return color_countries[d.country];})
+
     //8.  Adding a background label for the year.
-      const countryLabel = svg.append('text')
-        .attr('x', 40)
-        .attr('y', height - margin.bottom - 20)
-        .attr('fill', '#ccc')
-        .attr('font-family', 'Helvetica Neue, Arial')
-        .attr('font-weight', 500)
-        .attr('font-size', 50)
-        .text(country);
+      // const countryLabel = svg.append('text')
+      //   .attr('x', 40)
+      //   .attr('y', height - margin.bottom - 20)
+      //   .attr('fill', '#ccc')
+      //   .attr('font-family', 'Helvetica Neue, Arial')
+      //   .attr('font-weight', 500)
+      //   .attr('font-size', 50)
+      //   .text(country);
 
       document.getElementById("chart").appendChild(svg.node());
 
