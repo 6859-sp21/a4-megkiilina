@@ -20,8 +20,8 @@ http://soqr.fr/testsvg/embed-svg-liquid-layout-responsive-web-design.php
     display: inline-block;
     position: relative;
     vertical-align: top;
-    background-color: black;
-    opacity: 0.9;
+    /* background-color: black; */
+    opacity: 0.85;
   }
   .svg-content-responsive {
     display: inline-block;
@@ -45,15 +45,15 @@ http://soqr.fr/testsvg/embed-svg-liquid-layout-responsive-web-design.php
 
 
   <!-- Create an element where the map will take place -->
-  <div id="map-container" class="svg-container" width="1200" height="800">
+  <div id="map-container" class="svg-container" width="1000" height="800">
       <svg id="map" width="1000" height="800"></svg>
   </div>
 
   <script>
 
-  const coord = {"center": [[-6, 40], [-6, 40], [108, 36]], "scale": [1000, 1000, 1500], "rotate": [[90, 0], [90, 0], [-30, 0]]};
-  const countries = ["USA", "USA", "JPN"];
-  const colorCode = {"USA": "orange", "JPN": "green"};
+  const coord = {"center": [[-6, 40], [-6, 40], [18, 36], [-6, 37]], "scale": [1000, 1000, 1200, 1000], "rotate": [[90, 0], [90, 0], [-120, 0], [-110, 0]]};
+  const countries = ["USA", "USA", "JPN", "CHN"];
+  const colorCode = {"USA": "orange", "JPN": "green", "CHN": "red"};
 
   let worldmap = d3.select("#map"),
     width = +worldmap.attr("width"),
@@ -61,12 +61,12 @@ http://soqr.fr/testsvg/embed-svg-liquid-layout-responsive-web-design.php
 
   // Map and projection
   let path = d3.geoPath();
-  let sectionIndex = 0;
+  let sectionIndex = 2;
 
   // Data and color scale
   let data = d3.map();
   let colorScale = d3.scaleThreshold()
-    .domain([0, 2000000, 10000000, 20000000, 50000000, 200000000])
+    .domain([0, 2000000, 10000000, 30000000, 50000000, 200000000])
     .range(d3.schemeGreys[9]);
 
   // Load external data and boot
@@ -101,6 +101,7 @@ http://soqr.fr/testsvg/embed-svg-liquid-layout-responsive-web-design.php
         )
         .filter(data => data.id === countries[sectionIndex])
         .attr("fill", colorCode[countries[sectionIndex]])
+        .style("opacity", .8)
     }
 
     let mouseOver = function(d) {
@@ -111,18 +112,21 @@ http://soqr.fr/testsvg/embed-svg-liquid-layout-responsive-web-design.php
       d3.select(this)
         .transition()
         .duration(200)
-        .style("stroke-width", 2)
+        .attr('stroke-width', 3)
+        .style("opacity", 1)
     }
 
     let mouseLeave = function(d) {
       d3.selectAll(".Country")
         .transition()
         .duration(200)
+        .attr('stroke-width', .1)
         .style("opacity", .8)
       d3.select(this)
         .transition()
         .duration(200)
-        .style("stroke", "transparent")
+        .attr('stroke-width', .1)
+        .style("opacity", .8)
     }
     // Draw the map
     worldmap.append("g")
@@ -136,9 +140,8 @@ http://soqr.fr/testsvg/embed-svg-liquid-layout-responsive-web-design.php
         d.total = data.get(d.id) || 0;
         return colorScale(d.total);
       })
-      .attr("stroke", "black")
-      .attr('stroke-width', .5)
-      .attr('stroke-opacity', .8)
+      .attr("stroke", "white")
+      .attr('stroke-width', .1)
       .attr("class", function(d){ return "Country" } )
       .attr("d", d3.geoPath()
         .projection(projection)
