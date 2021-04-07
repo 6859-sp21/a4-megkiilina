@@ -177,6 +177,14 @@
 
         </div>
 
+        <div>
+            <h3> Section 4 Graph 1</h3>
+            There's some good information here too!
+            <ul>
+                <li> hello</li>
+            </ul>
+        </div>
+
 
         <div> lorem </div> <!-- this is a placeholder to keep the graph in place -->
 
@@ -256,11 +264,13 @@
             let zoomExtent = function (sectionIndex) {
                 console.log(sectionIndex + 'th section active');
 
+                if (sectionIndex >= countries.length) return;
+
                 projection.center(coord["center"][sectionIndex]);
                 projection.scale(coord["scale"][sectionIndex]);
                 projection.rotate(coord["rotate"][sectionIndex]);
 
-                d3.selectAll("container-1 path")
+                d3.selectAll("path")
                     .transition()
                     .duration(200)
                     .attr("d", d3.geoPath()
