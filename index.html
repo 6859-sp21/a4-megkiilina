@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<style>
+    @font-face{
+        font-family: 'JetBrains Mono';
+        src: url('https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/fonts/webfonts/JetBrainsMono-Regular.woff2') format('woff2'),
+             url('https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/fonts/ttf/JetBrainsMono-Regular.ttf') format('truetype');
+        font-weight: normal;
+        font-style: normal;
+    }
+
+    body {
+        margin: 0px auto;
+        font-family: "JetBrains Mono";
+        font-size: 23pt;
+    }
+
+    h1 {
+        margin-top: 100px;
+        margin-bottom:100px;
+        text-align: left;
+        font-size: 75px;
+    }
+
+    #authors {
+        font-size: 18pt;
+        text-align: left;
+        margin-bottom: 100px;
+        font-weight: bold;
+    }
+
+    .body-copy {
+        margin-bottom: 20px;
+
+    }
+
+    img {
+        margin-top: 40px;
+        margin-bottom: 10px;
+    }
+
+    .container-1 {
+      width: 100vw;
+      display: flex;
+      /* justify-content: space-between; */
+    }
+
+    #map-container {
+      position: fixed;
+      right: 0px;
+      width: 65%;
+      height: 100vh;
+      margin: 0px;
+      opacity: 0.9;
+    }
+
+    #map-svg {
+      width: 100%;
+      height: 100vh;
+    }
+
+    #sections {
+        /* position: absolute; */
+        width: 27%;
+        left: 0px;
+        padding: 4em;
+
+    }
+
+    #sections > div {
+        background: white;
+        opacity: .2;
+        margin-bottom: 200px;
+    }
+
+    #sections > div:last-child {
+        margin-bottom: 90px;
+    }
+
+    #sections > div.graph-scroll-active {
+        opacity: 1;
+    }
+
+    #graph {
+        padding-top: 100px;
+        width: 300px;
+        position: -webkit-sticky;
+        position: sticky;
+        top: 0px;
+    }
+
+    .mono {
+        font-family: monospace;
+    }
+
+</style>
+
+<script src="lib/d3v4+jetpack.js"></script>
+<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+<script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
+<script src="https://d3js.org/d3-zoom.v2.min.js"></script>
+
+<div id='container' class='container-1'>
+    <div id='sections'>
+      <div id='intro'>
+        <h1>Technology Adoption through the Fall of Communism</h1>
+        <div id="authors">
+            Kii Kang, Elina Oikonomaki, Megan Prakash </br>
+                6.859 Assignment 4
+        </div>
+        <div class="body-copy">
+            Humanity worldwide is continually developing new technology. Innovations such
+            as the telephone, TV, and internet permanently change global communication, and
+            adoption of novel technology is very disproportionate between countries.
+
+            Throughout the history of technology adoption documented in our dataset, a
+            country's GDP is strongly correlated with how quickly it is able to adopt
+            its use of a technology per capita. A particularly strong trend in the past
+            hundred years is that the world superpowers Russia, China, and the USA dominate in both GDP and technology adoption.
+
+            However, this trend is disrupted in the era of 1980-2010.
+            Scroll to see how worldwide adoption of communications technology changed
+            throughout that time.
+        </div><br>
+        <div style="font-size: 12pt; font-style: italic;">Dataset:
+
+            <a href="https://github.com/datasets/historical-adoption-of-technology" target="_blank">
+                Historical Adoption of Technology </a> with discussion
+            <a href="https://www.nber.org/system/files/working_papers/w15319/w15319.pdf" target="_blank">here.</a>
+        </div>
+      </div>
+
+
+      </br>
+
+        <div>
+            <h3>1876</h3>
+            <h4>Invention of the Telephone</h4>
+            1876 saw the invention of the telephone by Alexander Graham Bell in the USA, who later visited
+            Japan personally in 1877 to demonstrate the technology. [2]
+            From 1876, the USA led the world in telephone use, reaching as many as 180 million telephones in 1980
+            while the rest of the world adopted telephones much more slowly. In particular, Japan had
+            the next most telephones, at 48 million when the U.S. reached its peak.
+
+            <i style="font-weight: bold; color: red;">Please note these graphs are NOT real yet!! See our presentation for what the plan is</i>
+
+            <img src="graph-images/08.png" style='height: 100%; width: 100%; object-fit: contain'/>
+        </div>
+
+        <div>
+            <h3>1896</h3>
+            <h4>Invention of the Radio</h4>
+            Radio was patented in 1896 by Guglielmo Marconi, and the world began to develop applications for
+            this novel long-range communication technology. In particular, the 1910s saw the development
+            of entertainment broadcast stations, radio communications for aircraft, and even the early stages
+            of television, using radio to broadcast images.
+            <img src="graph-images/09.png" style='height: 100%; width: 100%; object-fit: contain'/>
+
+        </div>
+
+        <div>
+            <h3>1990</h3>
+            <h4>Japan and China Surge Forward with Telephones</h4>
+            China saw a massive influx of telephone acquisition in 1990,
+                coinciding with ${POLITICAL EVENT}. [3] Thus, a new trend in communications technology
+            emerged, where (detailed description of trend changes)
+            <img src="graph-images/010.png" style='height: 100%; width: 100%; object-fit: contain'/>
+        </div>
+
+        <div>
+            <h3>1991</h3>
+            <h4>The Fall of the USSR</h4>
+            The fall of the USSR in 1991 causes a distinct anomaly in the trend of world superpowers dominating
+            technology acquisition. The USSR's radio usage drastically falls post-1990, coinciding with a jump
+            upwards in China's usage.
+            <img src="Capture.JPG" style='height: 100%; width: 100%; object-fit: contain'/>
+        </div>
+
+        <div>
+            <h3>To be continued</h3>
+            <h4>There's more data that we will organize into a more focused narrative.</h4>
+
+        </div>
+
+        <div>  </div> <!-- this is a placeholder to keep the graph in place -->
+
+    </div>
+    <div id='map-container'>
+        <svg id="map-svg"></svg>
+    </div>
+
+</div>
+
+
+<div style="height:300px"></div>
+
+<!-- Each 'container' div corresponds to one graph -->
+<!-- See the js at the bottom of this file for where a d3 svg is assigned to .container-1 -->
+
+<script src="lib/d3v4+jetpack.js"></script>
+<script src="lib/graph-scroll.js"></script>
+<script>
+
+    var oldWidth = 0
+
+    function render() {
+        if (oldWidth == innerWidth) return
+        oldWidth = innerWidth
+
+        // var width = height = d3.select('#graph').node().offsetWidth
+        // var r = 40
+        //
+        //
+        // if (innerWidth <= 925){
+        //   width = innerWidth
+        //   height = innerHeight*.7
+        // }
+
+        // var svg = d3.select('#graph').html('')
+        //   .append('svg')
+        //     .attrs({width: width, height: height})
+
+        // var circle = svg.append('circle')
+        //     .attrs({cx: 0, cy: 0, r: r})
+
+        const coord = {"center": [[-6, 40], [-6, 40], [18, 36], [21, 60], [-6, 37], [150, 90]],
+            "scale": [1000, 1000, 1200, 1200, 1000, 400],
+            "rotate": [[90, 0], [90, 0], [-120, 0], [0, 0], [-110, 0], [20, 0]]};
+
+        const countries = [["USA"], ["CHN"], ["JPN"], ["SWE", "NOR", "FIN"], ["CHN"], ["CHN", "USA"]];
+
+        const colorCode = {"USA": "pink", "CHN": "green", "JPN":"purple","FIN": "#1A4778","NOR": "#477CB6","SWE": "#2613B7"};
+
+        let worldmap = d3.select("#map-svg"),
+            width = +worldmap.attr("width"),
+            height = +worldmap.attr("height");
+
+        let path = d3.geoPath();
+
+        let data = d3.map();
+        let colorScale = d3.scaleThreshold()
+            .domain([0, 2000000, 10000000, 30000000, 50000000, 200000000])
+            .range(d3.schemeGreys[9]);
+
+        // Load external data and boot
+        d3.queue()
+            .defer(d3.json, "https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json")
+            .defer(d3.csv, "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world_population.csv", function (d) {
+                data.set(d.code, +d.pop);
+            })
+            .await(ready);
+
+        function ready(error, topo) {
+            // D3 projections
+            // https://sodocumentation.net/d3-js/topic/9001/d3-projections
+            let projection = d3.geoAlbers()
+                .scale(document.getElementById("map-container").offsetWidth)
+                .center([0, 60])
+                .rotate([-20, 0])
+                .parallels([65, 65])
+                .translate([width / 2, height / 2]);
+
+            let zoomExtent = function (sectionIndex) {
+                console.log(sectionIndex + 'th section active');
+                if (sectionIndex === 0) return;
+                if (sectionIndex >= countries.length) return;
+
+                projection.center(coord["center"][sectionIndex]);
+                projection.scale(coord["scale"][sectionIndex]);
+                projection.rotate(coord["rotate"][sectionIndex]);
+
+                d3.selectAll("path")
+                    .transition()
+                    .duration(2000)
+                    .attr("d", d3.geoPath()
+                        .projection(projection)
+                    )
+                    .filter(data => countries[sectionIndex].includes(data.id))
+                    .attr("fill", (d, i) => {return colorCode[d.id];})
+                    .style("opacity", .8)
+            }
+
+            let mouseOver = function (d) {
+                d3.selectAll(".Country")
+                    .transition()
+                    .duration(500)
+                    .style("opacity", .5)
+                d3.select(this)
+                    .transition()
+                    .duration(200)
+                    .attr('stroke-width', 3)
+                    .style("opacity", 1)
+            }
+
+            let mouseLeave = function (d) {
+                d3.selectAll(".Country")
+                    .transition()
+                    .duration(200)
+                    .attr('stroke-width', .2)
+                    .style("opacity", .8)
+                d3.select(this)
+                    .transition()
+                    .duration(200)
+                    .attr('stroke-width', .1)
+                    .style("opacity", .8)
+            }
+
+            var mapVis =
+                worldmap.append("g")
+                .selectAll("path")
+                .data(topo.features)
+                .enter()
+                .append("path")
+                .attr("fill", function (d) {
+                    d.total = data.get(d.id) || 0;
+                    return colorScale(d.total);
+                })
+                .attr("stroke", "white")
+                .attr('stroke-width', .1)
+                .attr("class", function(d){ return "Country" } )
+                .attr("d", d3.geoPath()
+                    .projection(projection)
+                )
+                .on("mouseover", mouseOver )
+                .on("mouseleave", mouseLeave )
+
+            var mapHandler = d3.graphScroll()
+            .container(d3.select(".container-1"))
+            .graph(d3.selectAll('#map-container'))
+            .eventId('mapId') // namespace for events
+            .sections(d3.selectAll('.container-1 #sections > div'))
+            .on("active", function(i) { zoomExtent(i) })
+
+        }
+
+        // I'm Graph #1
+        // var gs = d3.graphScroll()
+        //     .container(d3.select('.container-1'))
+        //     .graph(d3.selectAll('container-1 #graph'))
+        //     .eventId('mapID')  // namespace for scroll and resize events
+        //     .sections(d3.selectAll('.container-1 #sections > div'))
+        //     .on('active', function (i) {
+        //         var pos = [{cx: width - r, cy: r},
+        //             {cx: r, cy: r},
+        //             {cx: width - r, cy: height - r},
+        //             {cx: width / 2, cy: height / 2}][i]
+        //
+        //         circle.transition().duration(1000)
+        //             .attrs(pos)
+        //             .transition()
+        //             .style('fill', colors[i])
+        //     })
+
+
+        d3.select('#source')
+            .styles({'margin-bottom': window.innerHeight - 450 + 'px', padding: '100px'})
+    }
+
+    render()
+    d3.select(window).on('resize', render)
+
+
+</script>
