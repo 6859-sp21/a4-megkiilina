@@ -11,22 +11,22 @@
     }
 
     body {
-        max-width: 1000px;
         margin: 0px auto;
         font-family: "JetBrains Mono";
-        font-size: 20px;
+        font-size: 23pt;
     }
 
     h1 {
-        margin-top: 80px;
-        margin-bottom:50px;
+        margin-top: 100px;
+        margin-bottom:100px;
         text-align: left;
+        font-size: 75px;
     }
 
     #authors {
-        font-size: 12pt;
+        font-size: 18pt;
         text-align: left;
-        margin-bottom: 20px;
+        margin-bottom: 100px;
         font-weight: bold;
     }
 
@@ -40,23 +40,32 @@
         margin-bottom: 10px;
     }
 
-    #container {
-        position: relative;
+    .container-1 {
+      width: 100vw;
+      display: flex;
+      /* justify-content: space-between; */
     }
 
     #map-container {
-        margin: 0px;
-        display: inline-block;
-        position: relative;
-        vertical-align: top;
-        /* background-color: black; */
-        opacity: 0.85;
+      position: fixed;
+      right: 0px;
+      width: 65%;
+      height: 100vh;
+      margin: 0px;
+      opacity: 0.9;
     }
 
+    #map-svg {
+      width: 100%;
+      height: 100vh;
+    }
 
     #sections {
-        width: 500px;
-        padding-top: 100px;
+        /* position: absolute; */
+        width: 27%;
+        left: 0px;
+        padding: 4em;
+
     }
 
     #sections > div {
@@ -79,51 +88,10 @@
         position: -webkit-sticky;
         position: sticky;
         top: 0px;
-        float: right;
-    }
-
-    @media (max-width: 925px) {
-        #graph {
-            width: 100%;
-            margin-left: 0px;
-            float: none;
-        }
-
-        #sections {
-            width: auto;
-            position: relative;
-            margin: 0px auto;
-        }
-
-        #sections > div {
-            background: rgba(255, 255, 255, .5);
-            padding: 10px;
-            border-top: 1px solid;
-            border-bottom: 1px solid;
-            margin-bottom: 80vh;
-        }
-
-        pre {
-            overflow: hidden;
-        }
-
-        h1 {
-            margin: 10px;
-        }
-    }
-
-
-    circle {
-        fill: steelblue;
     }
 
     .mono {
         font-family: monospace;
-    }
-
-    svg {
-        background-color: #eee;
-        margin-left: -40px;
     }
 
 </style>
@@ -133,46 +101,39 @@
 <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
 <script src="https://d3js.org/d3-zoom.v2.min.js"></script>
 
-<h1>Technology Adoption through the Fall of Communism</h1>
-<div id="authors">
-    Kii Kang, Elina Oikonomaki, Megan Prakash </br>
-        6.859 Assignment 4
-</div>
-
-
-<div class="body-copy">
-    Humanity worldwide is continually developing new technology. Innovations such
-    as the telephone, TV, and internet permanently change global communication, and
-    adoption of novel technology is very disproportionate between countries.
-
-    Throughout the history of technology adoption documented in our dataset, a
-    country's GDP is strongly correlated with how quickly it is able to adopt
-    its use of a technology per capita. A particularly strong trend in the past
-    hundred years is that the world superpowers Russia, China, and the USA dominate in both GDP and technology adoption.
-
-    However, this trend is disrupted in the era of 1980-2010.
-    Scroll to see how worldwide adoption of communications technology changed
-    throughout that time.
-</div>
-
-<div style="font-size: 9pt; font-style: italic;">Dataset:
-
-    <a href="https://github.com/datasets/historical-adoption-of-technology">
-        Historical Adoption of Technology </a> with discussion
-    <a href="https://www.nber.org/system/files/working_papers/w15319/w15319.pdf">here.</a>
-</div>
-
-
-</br>
-
-
 <div id='container' class='container-1'>
-    <div id='graph'>
-        <div id='map-container'>
-            <svg id="map-svg" width="800" height="500"></svg>
-        </div>
-    </div>
     <div id='sections'>
+      <div id='intro'>
+        <h1>Technology Adoption through the Fall of Communism</h1>
+        <div id="authors">
+            Kii Kang, Elina Oikonomaki, Megan Prakash </br>
+                6.859 Assignment 4
+        </div>
+        <div class="body-copy">
+            Humanity worldwide is continually developing new technology. Innovations such
+            as the telephone, TV, and internet permanently change global communication, and
+            adoption of novel technology is very disproportionate between countries.
+
+            Throughout the history of technology adoption documented in our dataset, a
+            country's GDP is strongly correlated with how quickly it is able to adopt
+            its use of a technology per capita. A particularly strong trend in the past
+            hundred years is that the world superpowers Russia, China, and the USA dominate in both GDP and technology adoption.
+
+            However, this trend is disrupted in the era of 1980-2010.
+            Scroll to see how worldwide adoption of communications technology changed
+            throughout that time.
+        </div><br>
+        <div style="font-size: 12pt; font-style: italic;">Dataset:
+
+            <a href="https://github.com/datasets/historical-adoption-of-technology" target="_blank">
+                Historical Adoption of Technology </a> with discussion
+            <a href="https://www.nber.org/system/files/working_papers/w15319/w15319.pdf" target="_blank">here.</a>
+        </div>
+      </div>
+
+
+      </br>
+
         <div>
             <h3>1876</h3>
             <h4>Invention of the Telephone</h4>
@@ -224,6 +185,9 @@
 
         <div>  </div> <!-- this is a placeholder to keep the graph in place -->
 
+    </div>
+    <div id='map-container'>
+        <svg id="map-svg"></svg>
     </div>
 
 </div>
@@ -281,7 +245,7 @@
 
         // Load external data and boot
         d3.queue()
-            .defer(d3.json, "world.geojson")
+            .defer(d3.json, "https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json")
             .defer(d3.csv, "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world_population.csv", function (d) {
                 data.set(d.code, +d.pop);
             })
@@ -291,7 +255,7 @@
             // D3 projections
             // https://sodocumentation.net/d3-js/topic/9001/d3-projections
             let projection = d3.geoAlbers()
-                .scale(document.getElementById("map-container").offsetWidth / 4)
+                .scale(document.getElementById("map-container").offsetWidth)
                 .center([0, 60])
                 .rotate([-20, 0])
                 .parallels([65, 65])
@@ -308,7 +272,7 @@
 
                 d3.selectAll("path")
                     .transition()
-                    .duration(200)
+                    .duration(2000)
                     .attr("d", d3.geoPath()
                         .projection(projection)
                     )
@@ -333,7 +297,7 @@
                 d3.selectAll(".Country")
                     .transition()
                     .duration(200)
-                    .attr('stroke-width', .1)
+                    .attr('stroke-width', .2)
                     .style("opacity", .8)
                 d3.select(this)
                     .transition()
