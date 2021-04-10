@@ -19,8 +19,11 @@
     h1 {
         margin-top: 100px;
         margin-bottom:100px;
-        text-align: left;
-        font-size: 75px;
+        font-size: 65pt;
+    }
+    h3 {
+        font-size: 80pt;
+        opacity: 0.55;
     }
 
     #authors {
@@ -41,31 +44,36 @@
     }
 
     .container-1 {
-      width: 100vw;
+      width: 100%;
       display: flex;
-      /* justify-content: space-between; */
+      justify-content: space-between;
     }
 
     #map-container {
       position: fixed;
+      font-size: 12pt;
+      text-align: center;
       right: 0px;
       width: 65%;
-      height: 100vh;
+      height: 100%;
       margin: 0px;
       opacity: 0.9;
     }
 
     #map-svg {
+      display: inline-block;
+    	position: absolute;
+    	top: 0;
+    	left: 0;
       width: 100%;
-      height: 100vh;
+      height: 100%;
+      float: right;
     }
 
     #sections {
-        /* position: absolute; */
-        width: 27%;
+        width: 30%;
         left: 0px;
-        padding: 4em;
-
+        margin: 3em;
     }
 
     #sections > div {
@@ -224,19 +232,35 @@
         // var circle = svg.append('circle')
         //     .attrs({cx: 0, cy: 0, r: r})
 
-        const coord = {"center": [[-6, 40], [-6, 40], [18, 36], [21, 60], [-6, 37], [150, 90]],
-            "scale": [1000, 1000, 1200, 1200, 1000, 400],
-            "rotate": [[90, 0], [90, 0], [-120, 0], [0, 0], [-110, 0], [20, 0]]};
+        const coord = {"center": [[0, 60], [-6, 40], [-6, 40], [18, 36], [21, 60], [-6, 37], [150, 90]],
+            "scale": [document.getElementById("container").offsetWidth/5, 1000, 1000, 1200, 1200, 1000, 400],
+            "rotate": [[-20, 0], [90, 0], [90, 0], [-120, 0], [0, 0], [-110, 0], [20, 0]]};
 
-        const countries = [["USA"], ["CHN"], ["JPN"], ["SWE", "NOR", "FIN"], ["CHN"], ["CHN", "USA"]];
+        const countries = [[],["USA"], ["CHN"], ["JPN"], ["SWE", "NOR", "FIN"], ["CHN"], ["CHN", "USA"]];
 
         const colorCode = {"USA": "pink", "CHN": "green", "JPN":"purple","FIN": "#1A4778","NOR": "#477CB6","SWE": "#2613B7"};
 
-        let worldmap = d3.select("#map-svg"),
-            width = +worldmap.attr("width"),
-            height = +worldmap.attr("height");
+        let worldmap = d3.select("svg");
+
+        let width = document.getElementById("map-container").offsetWidth,
+            height = document.getElementById("map-container").offsetHeight;
 
         let path = d3.geoPath();
+
+        // tooltip interaction
+        let tooltip = d3.select("#map-container")
+          .append("div")
+          .style("position", "absolute")
+          .style("visibility", "hidden")
+          .style("width", "100px")
+          .style("height", "65px")
+          .style("padding-top", "35px")
+          .style("border-style", "solid")
+          .style("border-radius", "50%")
+          .style("background", "white")
+          .style("font-weight", "bold");
+
+        // https://code-boxx.com/css-circles-text/
 
         let data = d3.map();
         let colorScale = d3.scaleThreshold()
@@ -245,7 +269,7 @@
 
         // Load external data and boot
         d3.queue()
-            .defer(d3.json, "https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json")
+            .defer(d3.json, "world.geojson")
             .defer(d3.csv, "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world_population.csv", function (d) {
                 data.set(d.code, +d.pop);
             })
@@ -255,7 +279,7 @@
             // D3 projections
             // https://sodocumentation.net/d3-js/topic/9001/d3-projections
             let projection = d3.geoAlbers()
-                .scale(document.getElementById("map-container").offsetWidth)
+                .scale(document.getElementById("container").offsetWidth/5)
                 .center([0, 60])
                 .rotate([-20, 0])
                 .parallels([65, 65])
@@ -271,7 +295,7 @@
                 projection.rotate(coord["rotate"][sectionIndex]);
 
                 d3.selectAll("path")
-                    .transition()
+                    .transition("zoom")
                     .duration(2000)
                     .attr("d", d3.geoPath()
                         .projection(projection)
@@ -282,28 +306,33 @@
             }
 
             let mouseOver = function (d) {
+                if(d3.active("zoom")) return;
                 d3.selectAll(".Country")
-                    .transition()
-                    .duration(500)
                     .style("opacity", .5)
                 d3.select(this)
                     .transition()
-                    .duration(200)
-                    .attr('stroke-width', 3)
+                    .duration(500)
+                    .attr('stroke-width', 5)
                     .style("opacity", 1)
+                    return tooltip
+                    .text(d.properties["name"])
+                    .style("visibility", "visible");
             }
 
             let mouseLeave = function (d) {
+                if(d3.active("zoom")) return;
                 d3.selectAll(".Country")
                     .transition()
-                    .duration(200)
-                    .attr('stroke-width', .2)
+                    .duration(500)
+                    .attr('stroke-width', .5)
                     .style("opacity", .8)
                 d3.select(this)
                     .transition()
-                    .duration(200)
-                    .attr('stroke-width', .1)
+                    .duration(500)
+                    .attr('stroke-width', .5)
                     .style("opacity", .8)
+                    return tooltip
+                    .style("visibility", "hidden");
             }
 
             var mapVis =
@@ -324,6 +353,11 @@
                 )
                 .on("mouseover", mouseOver )
                 .on("mouseleave", mouseLeave )
+                .on("mousemove", function(d){return tooltip
+                    .style("top", (d3.mouse(this)[1]-100)+"px")
+                    .style("left",(d3.mouse(this)[0]-50)+"px")
+                    .text(d.properties["name"])
+                    .style("visibility", "visible");})
 
             var mapHandler = d3.graphScroll()
             .container(d3.select(".container-1"))
@@ -351,6 +385,7 @@
         //             .transition()
         //             .style('fill', colors[i])
         //     })
+
 
 
         d3.select('#source')
