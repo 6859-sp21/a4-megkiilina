@@ -6,20 +6,22 @@
         font-family: 'JetBrains Mono';
         src: url('https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/fonts/webfonts/JetBrainsMono-Regular.woff2') format('woff2'),
              url('https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/fonts/ttf/JetBrainsMono-Regular.ttf') format('truetype');
-        font-weight: normal;
-        font-style: normal;
     }
 
     body {
         margin: 0px auto;
         font-family: "JetBrains Mono";
-        font-size: 23pt;
+        font-size: 15pt;
+        color: #e0e0e0;
     }
 
     h1 {
         margin-top: 100px;
         margin-bottom:100px;
-        font-size: 65pt;
+        font-size: 45pt;
+        text-decoration: underline;
+        text-decoration-style: dotted;
+        text-decoration-color: #535359;
     }
     h3 {
         font-size: 80pt;
@@ -27,7 +29,7 @@
     }
 
     #authors {
-        font-size: 18pt;
+        font-size: 16pt;
         text-align: left;
         margin-bottom: 100px;
         font-weight: bold;
@@ -35,7 +37,6 @@
 
     .body-copy {
         margin-bottom: 20px;
-
     }
 
     img {
@@ -47,17 +48,18 @@
       width: 100%;
       display: flex;
       justify-content: space-between;
+      background-color: #1d1e38;
     }
 
     #map-container {
       position: fixed;
-      font-size: 12pt;
+      font-size: 9.5pt;
       text-align: center;
       right: 0px;
       width: 65%;
       height: 100%;
       margin: 0px;
-      opacity: 0.9;
+
     }
 
     #map-svg {
@@ -73,11 +75,11 @@
     #sections {
         width: 30%;
         left: 0px;
-        margin: 3em;
+        padding-left: 2em;
+        padding-right: 2em;
     }
 
     #sections > div {
-        background: white;
         opacity: .2;
         margin-bottom: 200px;
     }
@@ -114,8 +116,7 @@
       <div id='intro'>
         <h1>Technology Adoption through the Fall of Communism</h1>
         <div id="authors">
-            Kii Kang, Elina Oikonomaki, Megan Prakash </br>
-                6.859 Assignment 4
+            Kii Kang<br> Elina Oikonomaki<br> Megan Prakash <br>
         </div>
         <div class="body-copy">
             Humanity worldwide is continually developing new technology. Innovations such
@@ -132,7 +133,6 @@
             throughout that time.
         </div><br>
         <div style="font-size: 12pt; font-style: italic;">Dataset:
-
             <a href="https://github.com/datasets/historical-adoption-of-technology" target="_blank">
                 Historical Adoption of Technology </a> with discussion
             <a href="https://www.nber.org/system/files/working_papers/w15319/w15319.pdf" target="_blank">here.</a>
@@ -151,7 +151,7 @@
             while the rest of the world adopted telephones much more slowly. In particular, Japan had
             the next most telephones, at 48 million when the U.S. reached its peak.
 
-            <i style="font-weight: bold; color: red;">Please note these graphs are NOT real yet!! See our presentation for what the plan is</i>
+            <i style="color: red;">Please note these graphs are NOT real yet!! See our presentation for what the plan is</i>
 
             <img src="graph-images/08.png" style='height: 100%; width: 100%; object-fit: contain'/>
         </div>
@@ -231,19 +231,24 @@
 
         // var circle = svg.append('circle')
         //     .attrs({cx: 0, cy: 0, r: r})
+        let width = document.getElementById("map-container").offsetWidth,
+            height = document.getElementById("map-container").offsetHeight;
 
-        const coord = {"center": [[0, 60], [-6, 40], [-6, 40], [18, 36], [21, 60], [-6, 37], [150, 90]],
-            "scale": [document.getElementById("container").offsetWidth/5, 1000, 1000, 1200, 1200, 1000, 400],
-            "rotate": [[-20, 0], [90, 0], [90, 0], [-120, 0], [0, 0], [-110, 0], [20, 0]]};
+        // const coord = {"center": [[0, 60], [-6, 40], [-6, 40], [18, 36], [21, 60], [-6, 37], [150, 90]],
+        //     "scale": [width/4, 500, 500, 600, 600, 500, 400],
+        //     "rotate": [[-20, 0], [90, 0], [90, 0], [-120, 0], [0, 0], [-110, 0], [20, 0]]};
 
-        const countries = [[],["USA"], ["CHN"], ["JPN"], ["SWE", "NOR", "FIN"], ["CHN"], ["CHN", "USA"]];
+        const coord = {"center": [[0, 60],[0, 60],[0, 60],[0, 60],[0, 60], [-6, 40], [-6, 40], [18, 36], [21, 60], [-6, 37], [150, 90]],
+            "scale": [width/4,width/4,width/4,width/4,width/4, 1000, 1000, 1200, 1200, 1000, 400],
+            "rotate": [[-20, 0],[-20, 0],[-20, 0],[-20, 0],[-20, 0],[-20, 0], [90, 0], [90, 0], [-120, 0], [0, 0], [-110, 0], [20, 0]]};
 
-        const colorCode = {"USA": "pink", "CHN": "green", "JPN":"purple","FIN": "#1A4778","NOR": "#477CB6","SWE": "#2613B7"};
+        const countries = [[], ["China", "Germany", "India", "Japan", "Russia", "United States"]];
+        const years = [2000, 1983, 1984, 1990, 2000];
+        const countryColorCode = {"United States": "pink", "China": "green", "India": "red", "Russia": "purple", "Japan": "blue", "Germany": "brown"};
 
         let worldmap = d3.select("svg");
 
-        let width = document.getElementById("map-container").offsetWidth,
-            height = document.getElementById("map-container").offsetHeight;
+
 
         let path = d3.geoPath();
 
@@ -252,36 +257,37 @@
           .append("div")
           .style("position", "absolute")
           .style("visibility", "hidden")
-          .style("width", "100px")
-          .style("height", "65px")
-          .style("padding-top", "35px")
+          .style("width", "80px")
+          .style("height", "50px")
+          .style("padding-top", "30px")
           .style("border-style", "solid")
           .style("border-radius", "50%")
           .style("background", "white")
-          .style("font-weight", "bold");
+          .style("font-weight", "bold")
+          .style("color", "black");
 
         // https://code-boxx.com/css-circles-text/
 
-        let data = d3.map();
+        let colorEncoding = d3.map();
         let colorScale = d3.scaleThreshold()
-            .domain([0, 2000000, 10000000, 30000000, 50000000, 200000000])
-            .range(d3.schemeGreys[9]);
+            .domain([1, 10000, 1000000, 10000000, 50000000, 200000000])
+            .range(["#1d1e38", "#333345", "#535359", "#a3a087", "#dddbab", "#c9c69e", "#fffdcc"])
 
-        // Load external data and boot
+        // Load external data and boot.text(d.properties["name"])
         d3.queue()
             .defer(d3.json, "world.geojson")
-            .defer(d3.csv, "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world_population.csv", function (d) {
-                data.set(d.code, +d.pop);
-            })
+            // .defer(d3.csv, "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world_population.csv", function (d) {
+            //     data.set(d.code, +d.pop);
+            // })
             .await(ready);
 
         function ready(error, topo) {
             // D3 projections
             // https://sodocumentation.net/d3-js/topic/9001/d3-projections
             let projection = d3.geoAlbers()
-                .scale(document.getElementById("container").offsetWidth/5)
-                .center([0, 60])
-                .rotate([-20, 0])
+                .scale(coord["scale"][0])
+                .center(coord["center"][0])
+                .rotate(coord["rotate"][0])
                 .parallels([65, 65])
                 .translate([width / 2, height / 2]);
 
@@ -300,10 +306,33 @@
                     .attr("d", d3.geoPath()
                         .projection(projection)
                     )
-                    .filter(data => countries[sectionIndex].includes(data.id))
-                    .attr("fill", (d, i) => {return colorCode[d.id];})
-                    .style("opacity", .8)
+                    .filter(d => countries[sectionIndex].includes(d.properties["name"]))
+                    .transition()
+                    .duration(1000)
+                    .attr("fill", (d, i) => {return countryColorCode[d.properties["name"]];})
             }
+
+            let fillCountries = function (sectionIndex){
+                console.log('We are in ' + years[sectionIndex]);
+                d3.csv("aggregation/Historical_Agg_Cleaned.csv", function(d){
+                      return { year : +d.Year, country_name : d.Country, cellphone : +d.Cellphone }
+                    },
+                    function(data){
+                      let dataFilteredByYear = data.filter(function(d) {
+                        return d.year === years[sectionIndex];
+                      })
+                      dataFilteredByYear.forEach(function(d){
+                        colorEncoding.set(d.country_name, d.cellphone);
+                      })
+                      console.log(colorEncoding);
+                      d3.selectAll("path")
+                        .transition()
+                        .duration(1500)
+                        .attr("fill", d => {
+                          return colorScale(colorEncoding.get(d.properties["name"]) || 0) ;
+                    })
+                    }
+            )}
 
             let mouseOver = function (d) {
                 if(d3.active("zoom")) return;
@@ -311,8 +340,8 @@
                     .style("opacity", .5)
                 d3.select(this)
                     .transition()
-                    .duration(500)
-                    .attr('stroke-width', 5)
+                    .duration(200)
+                    .attr('stroke-width', 2.5)
                     .style("opacity", 1)
                     return tooltip
                     .text(d.properties["name"])
@@ -322,49 +351,42 @@
             let mouseLeave = function (d) {
                 if(d3.active("zoom")) return;
                 d3.selectAll(".Country")
-                    .transition()
-                    .duration(500)
                     .attr('stroke-width', .5)
-                    .style("opacity", .8)
+                    .style("opacity", 1)
                 d3.select(this)
-                    .transition()
-                    .duration(500)
                     .attr('stroke-width', .5)
-                    .style("opacity", .8)
+                    .style("opacity", 1)
                     return tooltip
                     .style("visibility", "hidden");
             }
 
-            var mapVis =
-                worldmap.append("g")
+            var mapVis = worldmap.append("g")
                 .selectAll("path")
                 .data(topo.features)
                 .enter()
                 .append("path")
-                .attr("fill", function (d) {
-                    d.total = data.get(d.id) || 0;
-                    return colorScale(d.total);
-                })
                 .attr("stroke", "white")
-                .attr('stroke-width', .1)
-                .attr("class", function(d){ return "Country" } )
+                .attr('stroke-width', .5)
+                .attr("class", d => { return "Country" } )
                 .attr("d", d3.geoPath()
                     .projection(projection)
                 )
                 .on("mouseover", mouseOver )
-                .on("mouseleave", mouseLeave )
+                .on("mouseout", mouseLeave )
                 .on("mousemove", function(d){return tooltip
-                    .style("top", (d3.mouse(this)[1]-100)+"px")
-                    .style("left",(d3.mouse(this)[0]-50)+"px")
+                    .style("top", (d3.mouse(this)[1]-90)+"px")
+                    .style("left",(d3.mouse(this)[0]-40)+"px")
                     .text(d.properties["name"])
                     .style("visibility", "visible");})
+
+
 
             var mapHandler = d3.graphScroll()
             .container(d3.select(".container-1"))
             .graph(d3.selectAll('#map-container'))
             .eventId('mapId') // namespace for events
             .sections(d3.selectAll('.container-1 #sections > div'))
-            .on("active", function(i) { zoomExtent(i) })
+            .on("active", function(i) { zoomExtent(i), fillCountries(i) })
 
         }
 
