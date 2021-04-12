@@ -238,8 +238,8 @@
                            ["China", "Germany", "India", "Japan", "Russia", "United States"],
                            ["United States"],
                            ["China", "Germany", "India", "Japan", "Russia", "United States"]];
-        const yearSeq = [2000, 1877, 1990, 1927, 1927, 1920, 1983, 1983];
-        const techSeq = ["Telephone","Telephone","Telephone","Telephone","Telephone", "Radio", "Radio", "Cellphone"];
+        const yearSeq = [1995, 1877, 1990, 1927, 1927, 1920, 1983, 1983];
+        const techSeq = ["Cellphone","Telephone","Telephone","Telephone","Telephone", "Radio", "Radio", "Cellphone"];
 
         // const countryColorCode = {"United States": "pink", "China": "green", "India": "red", "Russia": "purple", "Japan": "blue", "Germany": "brown"};
 
@@ -319,19 +319,22 @@
 
             let fillCountries = function (sectionIndex){
                 techDisplayed = techSeq[sectionIndex].toString();
-                console.log(techDisplayed + " in " + yearSeq[sectionIndex]);
+                yearDisplayed = yearSeq[sectionIndex];
+                console.log(techDisplayed + " in " + yearDisplayed);
                 let max;
-                d3.csv("aggregation/Historical_Agg_Cleaned.csv", function(d){
+                d3.queue()
+                  .defer(d3.csv, "aggregation/Historical_Agg_Cleaned.csv", function(d){
                       max = Math.max(d[techDisplayed]);
                       return { year : +d.Year, country_name : d.Country, Cellphone : +d.Cellphone, Internetuser: +d.Internetuser, Radio: +d.Radio, Telephone: +d.Telephone }
                     },
                     function(data){
                       let dataFilteredByYear = data.filter(function(d) {
-                        return d.year === yearSeq[sectionIndex];
+                        return d.year === yearDisplayed;
                       })
                       dataFilteredByYear.forEach(function(d){
                         colorEncoding.set(d.country_name, d[techDisplayed]);
                       })
+                      console.log(colorEncoding);
                       colorScale = d3.scaleThreshold()
                           .domain([1, max/5000, max/500, max/50, max/5, max])
                           .range(["#1d1e38", "#333345", "#535359", "#a3a087", "#dddbab", "#c9c69e", "#fffede"])
@@ -341,8 +344,10 @@
                         .attr("fill", d => {
                           return colorScale(colorEncoding.get(d.properties["name"]) || 0) ;
                     })
-                    }
-            )}
+                    })
+                    .await(ready);
+
+            }
 
             let mouseOver = function (d) {
                 if(d3.active("zoom")) return;
