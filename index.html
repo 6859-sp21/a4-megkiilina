@@ -331,6 +331,7 @@
                       let dataFilteredByYear = data.filter(function(d) {
                         return d.year === yearDisplayed;
                       })
+                      colorEncoding.clear();
                       dataFilteredByYear.forEach(function(d){
                         colorEncoding.set(d.country_name, d[techDisplayed]);
                       })
