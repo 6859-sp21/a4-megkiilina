@@ -12,27 +12,33 @@
         margin: 0px auto;
         font-family: "JetBrains Mono";
         font-size: 15pt;
+        font-weight:"lighter";
         color: #e0e0e0;
     }
 
     h1 {
         margin-top: 100px;
         margin-bottom:100px;
-        font-size: 45pt;
+        font-size: 42pt;
         text-decoration: underline;
         text-decoration-style: dotted;
         text-decoration-color: #535359;
     }
-    h3 {
+    h2 {
         font-size: 80pt;
         opacity: 0.55;
+    }
+    h4 {
+      display: inline;
+      font-size: 7pt;
+      line-height: -7pt;
     }
 
     #authors {
         font-size: 16pt;
         text-align: left;
         margin-bottom: 100px;
-        font-weight: bold;
+        font-weight: bolder;
     }
 
     .body-copy {
@@ -53,13 +59,17 @@
 
     #map-container {
       position: fixed;
-      font-size: 9.5pt;
+      font-size: 10pt;
+      font-weight: bolder;
       text-align: center;
       right: 0px;
       width: 65%;
       height: 100%;
       margin: 0px;
+    }
 
+    .a {
+      font-size: 5pt;
     }
 
     #map-svg {
@@ -93,7 +103,7 @@
     }
 
     #graph {
-        padding-top: 100px;
+        margin-top: 100px;
         width: 300px;
         position: -webkit-sticky;
         position: sticky;
@@ -114,7 +124,7 @@
 <div id='container' class='container-1'>
     <div id='sections'>
       <div id='intro'>
-        <h1>Technology Adoption through the Fall of Communism</h1>
+        <h1>Atlas of<br> Telecomm- unication Technology<br> in the 20C</h1>
         <div id="authors">
             Kii Kang<br> Elina Oikonomaki<br> Megan Prakash <br>
         </div>
@@ -143,44 +153,38 @@
       </br>
 
         <div>
-            <h3>1876</h3>
-            <h4>Invention of the Telephone</h4>
+            <h2>1877</h2>
+            <h3>Invention of the Telephone</h3>
             1876 saw the invention of the telephone by Alexander Graham Bell in the USA, who later visited
             Japan personally in 1877 to demonstrate the technology. [2]
             From 1876, the USA led the world in telephone use, reaching as many as 180 million telephones in 1980
             while the rest of the world adopted telephones much more slowly. In particular, Japan had
             the next most telephones, at 48 million when the U.S. reached its peak.
-        </div>
-        <div>
           <img src="graph-images/08.png" style='height: 100%; width: 100%; object-fit: contain'/>
         </div>
 
         <div>
-            <h3>1896</h3>
-            <h4>Invention of the Radio</h4>
+            <h2>1920</h2>
+            <h3>Invention of the Radio</h3>
             Radio was patented in 1896 by Guglielmo Marconi, and the world began to develop applications for
             this novel long-range communication technology. In particular, the 1910s saw the development
             of entertainment broadcast stations, radio communications for aircraft, and even the early stages
             of television, using radio to broadcast images.
-        </div>
-        <div>
           <img src="graph-images/09.png" style='height: 100%; width: 100%; object-fit: contain'/>
         </div>
         <div>
-            <h3>1920</h3>
-            <h4>First commercial radio broadcast</h4>
+            <h2>1980</h2>
+            <h3>First commercial radio broadcast</h3>
             “On November 2, 1920, station KDKA made the nation's first commercial broadcast
             (a term coined by Conrad himself). They chose that date because it was election day,
              and the power of radio was proven when people could hear the results of the Harding-Cox
               presidential race before they read about it in the newspaper.” [1]
               <a href = "http://www.pbs.org/wgbh/aso/databank/entries/dt20ra.html" target = "_blank">Information about radio.</a>
-        </div>
-        <div>
           <img src="graph-images/010.png" style='height: 100%; width: 100%; object-fit: contain'/>
         </div>
         <div>
-            <h3>1991</h3>
-            <h4>The Fall of the USSR</h4>
+            <h2>1991</h2>
+            <h3>The Fall of the USSR</h3>
             The fall of the USSR in 1991 causes a distinct anomaly in the trend of world superpowers dominating
             technology acquisition. The USSR's radio usage drastically falls post-1990, coinciding with a jump
             upwards in China's usage.
@@ -188,8 +192,8 @@
         </div>
 
         <div>
-            <h3>To be continued</h3>
-            <h4>There's more data that we will organize into a more focused narrative.</h4>
+            <h2>To be continued</h2>
+            <h3>There's more data that we will organize into a more focused narrative.</h3>
 
         </div>
 
@@ -225,35 +229,46 @@
         //     "scale": [width/4, 500, 500, 600, 600, 500, 400],
         //     "rotate": [[-20, 0], [90, 0], [90, 0], [-120, 0], [0, 0], [-110, 0], [20, 0]]};
 
-        const coord = {"center": [[0, 60], [-10, 50], [0, 60], [-6, 40], [18, 36], [21, 60], [-6, 37], [150, 90]],
-            "scale": [width/4, 1300, width/4, width/2, 1000, 1200, 1200, 1000, 400],
-            "rotate": [[-20, 0],[-20, 0],[-20, 0], [90, 0], [90, 0], [-120, 0], [0, 0], [-110, 0], [20, 0]]};
+        const coord = {"center": [[0, 60], [0, 60], [0, 60], [0, 60], [0, 60], [0, 60], [-10, 50], [0, 60], [-6, 40], [18, 36], [21, 60], [-6, 37], [150, 90]],
+            "scale": [width/4, width/4, width/4, width/4, width/4, width/4, width/4, width/2, 1000, 1200, 1200, 1000, 400],
+            "rotate": [[-20, 0],[-20, 0],[-20, 0], [-20, 0], [-20, 0], [-20, 0], [-20, 0], [-20, 0], [90, 0], [90, 0], [-120, 0], [0, 0], [-110, 0], [20, 0]]};
 
-        const countries = [[],
+        const countriesHighlighted = [[],
                            ["Germany"],
                            ["China", "Germany", "India", "Japan", "Russia", "United States"],
                            ["United States"],
                            ["China", "Germany", "India", "Japan", "Russia", "United States"]];
-        const yearSeq = [1995, 1877, 1877, 1927, 1927, 1920, 1983, 1983];
+        const yearSeq = [2000, 1877, 1990, 1927, 1927, 1920, 1983, 1983];
         const techSeq = ["Telephone","Telephone","Telephone","Telephone","Telephone", "Radio", "Radio", "Cellphone"];
-        const countryColorCode = {"United States": "pink", "China": "green", "India": "red", "Russia": "purple", "Japan": "blue", "Germany": "brown"};
 
+        // const countryColorCode = {"United States": "pink", "China": "green", "India": "red", "Russia": "purple", "Japan": "blue", "Germany": "brown"};
+
+        //global vars
         let worldmap = d3.select("svg");
-
         let path = d3.geoPath();
+        let techDisplayed
 
         // tooltip interaction
         let tooltip = d3.select("#map-container")
           .append("div")
           .style("position", "absolute")
           .style("visibility", "hidden")
-          .style("width", "80px")
-          .style("height", "50px")
-          .style("padding-top", "30px")
+          .style("width", "90px")
+          .style("height", "70px")
+          .style("padding-top", "20px")
           .style("border-style", "solid")
           .style("border-radius", "50%")
           .style("background", "white")
           .style("font-weight", "bold")
+          .style("color", "black");
+
+        let tooltip2 = d3.select("#map-container")
+          .append("div")
+          .style("position", "absolute")
+          .style("visibility", "hidden")
+          .style("width", "90px")
+          .style("height", "75px")
+          .style("padding-top", "15px")
           .style("color", "black");
 
         // https://code-boxx.com/css-circles-text/
@@ -263,9 +278,6 @@
         // Load external data and boot.text(d.properties["name"])
         d3.queue()
             .defer(d3.json, "world.geojson")
-            // .defer(d3.csv, "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world_population.csv", function (d) {
-            //     data.set(d.code, +d.pop);
-            // })
             .await(ready);
 
         function ready(error, topo) {
@@ -281,7 +293,7 @@
             let zoomExtent = function (sectionIndex) {
                 console.log(sectionIndex + 'th section active');
                 // if (sectionIndex === 0) return;
-                if (sectionIndex >= countries.length) return;
+                // if (sectionIndex >= countries.length) return;
 
                 projection.center(coord["center"][sectionIndex]);
                 projection.scale(coord["scale"][sectionIndex]);
@@ -293,19 +305,20 @@
                     .attr("d", d3.geoPath()
                         .projection(projection)
                     )
-                    .filter(d => countries[sectionIndex].includes(d.properties["name"]))
-                    .transition()
-                    .duration(1500)
-                    .attr("fill", (d, i) => {return countryColorCode[d.properties["name"]];})
-                    .transition()
-                    .duration(1500)
-                    .attr("fill", d => {
-                      return colorScale(colorEncoding.get(d.properties["name"]) || 0);
-                    })
+                    //highlight countries where event has taken place(optional?)
+                    // .filter(d => countriesHighlighted[sectionIndex].includes(d.properties["name"]))
+                    // .transition()
+                    // .duration(1500)
+                    // .attr("fill", (d, i) => {return countryColorCode[d.properties["name"]] || "red";})
+                    // .transition()
+                    // .duration(1500)
+                    // .attr("fill", d => {
+                    //   return colorScale(colorEncoding.get(d.properties["name"]) || 0);
+                    // })
             }
 
             let fillCountries = function (sectionIndex){
-                let techDisplayed = techSeq[sectionIndex].toString();
+                techDisplayed = techSeq[sectionIndex].toString();
                 console.log(techDisplayed + " in " + yearSeq[sectionIndex]);
                 let max;
                 d3.csv("aggregation/Historical_Agg_Cleaned.csv", function(d){
@@ -370,10 +383,20 @@
                 )
                 .on("mouseover", mouseOver )
                 .on("mouseout", mouseLeave )
-                .on("mousemove", function(d){return tooltip
-                    .style("top", (d3.mouse(this)[1]-90)+"px")
-                    .style("left",(d3.mouse(this)[0]-40)+"px")
-                    .text(d.properties["name"])
+                .on("mousemove", function(d){
+                  let tooltipNo = colorEncoding.get(d.properties["name"]) || 0;
+                  let tooltipText = tooltipNo.toString();
+                  if (tooltipNo > 1000000){
+                    tooltipText = (Math.round(tooltipNo/100000)/10).toString() + "M"
+                  } else if (tooltipNo > 1000){
+                    tooltipText = (Math.round(tooltipNo/100)/10).toString() + "K"
+                  }
+                  let mouseY = d3.mouse(this)[1]-110;
+                  if(d3.mouse(this)[1] <100){mouseY = d3.mouse(this)[1]+20}
+                  return tooltip
+                    .style("top", mouseY + "px" )
+                    .style("left",(d3.mouse(this)[0]-45)+"px")
+                    .html(d.properties["name"] + "<br/>" + "<h4>" + tooltipText + '<br/>' + techDisplayed + 's' + "</h4>")
                     .style("visibility", "visible");})
 
 
@@ -407,8 +430,8 @@
 
 
 
-        d3.select('#source')
-            .styles({'margin-bottom': window.innerHeight - 450 + 'px', padding: '100px'})
+        // d3.select('#source')
+        //     .styles({'margin-bottom': window.innerHeight - 450 + 'px', padding: '100px'})
     }
 
     render()
