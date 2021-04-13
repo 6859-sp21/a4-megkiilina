@@ -353,11 +353,11 @@
 
             let createLegend = function() {
               // https://d3-legend.susielu.com/#color-examples
-              max = 100000000;
+              max = 1000000000;
               console.log(max);
               var legendScale = d3.scaleLog()
-                  .domain([1, max/5000, max/500, max/50, max/5, max])
-                  .range(["#1d1e38", "#333345", "#535359", "#a3a087", "#c4c19f", "#dddbab", "#fffede"]);
+                  .domain([1,max/100000, max/10000, max/1000, max/100, max/10, max])
+                  .range(["#1d1e38", "#333345", "#535359", "#a3a087", "#c4c19f", "#dddbab", "#fffede", "fff"]);
 
               var legendSvg = d3.select("svg");
               legendSvg.append("g")
@@ -365,12 +365,12 @@
                 .attr("transform", "translate(30,25)");
 
               var logLegend = d3.legendColor()
-                  .cells([10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000])
+                  .cells([10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000, 1000000000])
                   .shapePadding(0)
-                  .shapeWidth(width/9)
+                  .shapeWidth(width/10)
                   .shapeHeight(5)
                   .orient("horizontal")
-                  .labels(['10', '100', '1K', '10K', '100K', '1M', '10M', '100M'])
+                  .labels(['10', '100', '1K', '10K', '100K', '1M', '10M', '100M', '1B'])
                   .scale(legendScale);
 
               legendSvg.select(".legend")
@@ -432,7 +432,6 @@
                     .style("left",(d3.mouse(this)[0]-45)+"px")
                     .html(d.properties["name"] + "<br/>" + "<h4>" + tooltipText + '<br/>' + techDisplayed + 's' + "</h4>")
                     .style("visibility", "visible");})
-
 
 
             var mapHandler = d3.graphScroll()
