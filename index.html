@@ -10,21 +10,21 @@
 
     body {
         margin: 0px auto;
-        font-family: "JetBrains Mono";
-        font-size: 15pt;
+        font-family: "JetBrains Mono",monospace;
+        font-size: 13pt;
         color: #e0e0e0;
     }
 
     h1 {
         margin-top: 100px;
         margin-bottom:100px;
-        font-size: 42pt;
+        font-size: 36pt;
         text-decoration: underline;
         text-decoration-style: dotted;
         text-decoration-color: #535359;
     }
     h2 {
-        font-size: 80pt;
+        font-size: 70pt;
         opacity: 0.55;
     }
     h4 {
@@ -56,28 +56,29 @@
     }
 
     .legend text.label  {
-      fill: grey;
+      fill: lightgrey;
       font-size: 8pt;
     }
-    .legend{
-      position: absolute;
-      bottom:0;
-      right: 0;
-    }
+
 
     #map-container {
       position: fixed;
       font-size: 10pt;
       font-weight: bolder;
       text-align: center;
-      right: 0px;
-      width: 65%;
+      right: 30px;
+      width: 58%;
+        top: 30px;
       height: 100%;
       margin: 0px;
     }
 
     .a {
       font-size: 5pt;
+    }
+
+    a {
+        color:lightgrey;
     }
 
     #map-svg {
@@ -90,8 +91,19 @@
       float: right;
     }
 
+    #legend-svg{
+        display: inline-block;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        float: right;
+        background-color: #1d1e38;
+        max-height: 90px;
+    }
+
     #sections {
-        width: 30%;
+        width: 35%;
         left: 0px;
         padding-left: 2em;
         padding-right: 2em;
@@ -133,7 +145,7 @@
 <div id='container' class='container-1'>
     <div id='sections'>
       <div id='intro'>
-        <h1>Atlas of<br> Telecomm- unication Technology<br> in the 20C</h1>
+        <h1>Atlas of<br> Telecomm- unication Technology<br> in the 20th Century</h1>
         <div id="authors">
             Kii Kang<br> Elina Oikonomaki<br> Megan Prakash <br>
         </div>
@@ -141,19 +153,28 @@
             Humanity worldwide is continually developing new technology. Innovations such
             as the telephone, TV, and internet permanently change global communication, and
             adoption of novel technology is very disproportionate between countries.
-
+            <p>
             Throughout the history of technology adoption documented in our dataset, a
             country's GDP is strongly correlated with how quickly it is able to adopt
-            its use of a technology per capita. A particularly strong trend in the past
-            hundred years is that the world superpowers Russia, China, and the USA dominate in both GDP and technology adoption.
-
-            However, this trend is disrupted in the era of 1980-2010.
-            Scroll to see how worldwide adoption of communications technology changed
-            throughout that time.
+            its use of a technology per capita. However, particular smaller countries like Japan and Germany
+            often acquire technology disproportionately quickly.
+            <p>
+            Scroll on to see how these trends manifest throughout communications technology in the 20th century.
         </div><br>
-        <div style="font-size: 12pt; font-style: italic;">Dataset:
+
+        <div style="font-size: 9pt; font-style: italic;">
+            All y-axes are log scale and describe the total number of devices in a given country in a particular year.
+            We chose not to do technology per capita, because the rate of technology acquisition is not related to
+            a country’s population.
+            <p>
+            The issue with relating the two is particularly noticeable with the extremely
+            populous China and India, where a large segment of the population is less privileged with access to new
+            technology. Measuring technology per capita causes those countries to score very low compared to the rest
+            of the world. On the other hand, technology acquisition showed a strong correlation with country GDP.
+            <p>
+            Dataset:
             <a href="https://github.com/datasets/historical-adoption-of-technology" target="_blank">
-                Historical Adoption of Technology </a> with discussion
+                Cross-country Historical Adoption of Technology (CHAT) dataset </a> with discussion
             <a href="https://www.nber.org/system/files/working_papers/w15319/w15319.pdf" target="_blank">here.</a>
         </div>
       </div>
@@ -164,45 +185,68 @@
         <div>
             <h2>1877</h2>
             <h3>Invention of the Telephone</h3>
-            1876 saw the invention of the telephone by Alexander Graham Bell in the USA, who later visited
-            Japan personally in 1877 to demonstrate the technology. [2]
-            From 1876, the USA led the world in telephone use, reaching as many as 180 million telephones in 1980
-            while the rest of the world adopted telephones much more slowly. In particular, Japan had
-            the next most telephones, at 48 million when the U.S. reached its peak.
+            1876 saw the invention of the telephone by Alexander Graham Bell in Boston, USA, which other countries soon
+            rushed to replicate [1]. The most successful countries of the century in telephone acquisition were the USA
+            and Germany, who had rapidly set up commercial telephone manufacturing by 1877 [2]. The USA led the world in
+            adopting telephones with 1.3 million telephones by 1900, while Germany came in second with 306,000.
           <img src="graph-images/08.png" style='height: 100%; width: 100%; object-fit: contain'/>
         </div>
 
         <div>
             <h2>1920</h2>
-            <h3>Invention of the Radio</h3>
-            Radio was patented in 1896 by Guglielmo Marconi, and the world began to develop applications for
-            this novel long-range communication technology. In particular, the 1910s saw the development
-            of entertainment broadcast stations, radio communications for aircraft, and even the early stages
-            of television, using radio to broadcast images.
+            <h3>First commercial radio broadcast</h3>
+            On November 2, 1920, the radio station KDKA in Pittsburgh, USA made the first ever commercial radio
+            broadcast. [3] Decades prior, the Italian inventor Gugliermo Marconi had demonstrated radio communication
+            in 1899. Though the USA was not considered to be the world leader in scientific and engineering innovation
+            pre-1920, the American companies General Electric (GE), American Telephone and Telegraph (AT&T) and
+            Westinghouse convened to form the Radio Company of America (RCA) and accelerate radio development in the
+            USA. <p>
+
+            The earliest data for the number of radios in the USA is from 1938; by that year, the USA led with
+            40,800 radios, followed by Germany with 9,575, Russia with 5,624, and Japan with 4,166. The noise seen
+            in the median lines in these graphs can be attributed to instances of missing data.
           <img src="graph-images/09.png" style='height: 100%; width: 100%; object-fit: contain'/>
         </div>
         <div>
-            <h2>1980</h2>
-            <h3>First commercial radio broadcast</h3>
-            “On November 2, 1920, station KDKA made the nation's first commercial broadcast
-            (a term coined by Conrad himself). They chose that date because it was election day,
-             and the power of radio was proven when people could hear the results of the Harding-Cox
-              presidential race before they read about it in the newspaper.” [1]
-              <a href = "http://www.pbs.org/wgbh/aso/databank/entries/dt20ra.html" target = "_blank">Information about radio.</a>
+            <h2>1983</h2>
+            <h3>First commercially available cellular phone</h3>
+            Though the world’s first cellular network had already been launched in Japan by Nippon Telegraph and
+            Telephone in 1979, it was not until 1983 when commercial cellular phone communication became available.
+            The first 1G network was launched in the USA by Chicago-based Ameritech, shortly followed by the DynaTAC
+            8000X, Motorola’s first commercial portable cellular phone.  [5] In the following graphs, the USA’s and
+            Japan’s early access to cellular phone technology is clear, though Germany is quick to catch up by 1986.
           <img src="graph-images/010.png" style='height: 100%; width: 100%; object-fit: contain'/>
         </div>
         <div>
-            <h2>1991</h2>
-            <h3>The Fall of the USSR</h3>
-            The fall of the USSR in 1991 causes a distinct anomaly in the trend of world superpowers dominating
-            technology acquisition. The USSR's radio usage drastically falls post-1990, coinciding with a jump
-            upwards in China's usage.
+            <h2>1989</h2>
+            <h3>Invention of the World Wide Web</h3>
+            The World Wide Web was invented in 1989 by Sir Tim Berners-Lee, an English contractor at CERN in
+            Switzerland. Berners-Lee, in particular, was the first to use computer networking technologies and markup
+            languages such as HTML to create an international, publicly-accessible network for sharing information. The
+            early adopters of the Web were academic research institutions who were peers of Berners-Lee and CERN and
+            quickly published research work as well as webcomics and animated images. [7]
+            <p>
+            The creation of the internet predates the World Wide Web by many decades, and internet innovation was
+            primarily concentrated in the USA with collaborators in the UK and in France [6]. However, by 1995,
+            it’s clear that Germany and Japan are once again disproportionately ahead of with Internet users
+            relative to their GDP, while the USA is a full order of magnitude ahead with 25.2 million users
+            compared to Japan and Germany’s 2 million.
+
             <img src="graph-images/013.png" style='height: 100%; width: 100%; object-fit: contain'/>
         </div>
 
         <div>
-            <h2>To be continued</h2>
-            <h3>There's more data that we will organize into a more focused narrative.</h3>
+            <h2>1991</h2>
+            <h3>Fall of the Soviet Union</h3>
+            A noticeable quirk in the dataset is related to the fall of the Soviet Union in 1991. On a
+            significant number of technologies, Russia (considered to be the same bucket as the Soviet Union
+            in this dataset) dipped significantly in technology usage starting 1990. While it is known that
+            multitudes of Soviet  engineers and scientists left Russia following the dissolution of the USSR [8],
+            a more likely explanation is that pre-1991, the “Russia” label of the dataset included the entire USSR.
+            On the other hand, post-1991 it only includes the country of Russia and none of the sovereign states
+            formed after the USSR’s collapse. The following graphs of population vs. GDP and population vs. year
+            corroborate this guess, since it’s clear that the population of “Russia” dips after 1991.
+            This dip is also apparent in the earlier graph about radio usage.
 
         </div>
 
@@ -211,7 +255,23 @@
     </div>
     <div id='map-container'>
         <svg id="map-svg"></svg>
+        <svg id="legend-svg"></svg>
     </div>
+
+</div>
+<div id="endnotes">
+    <div id="citations">
+        [1] https://en.wikipedia.org/wiki/History_of_the_telephone
+        [2] http://oldtelephones.com/blog/2012/09/04/bells-telephone-in-germany/
+        [3] http://www.pbs.org/wgbh/aso/databank/entries/dt20ra.html
+        [4] https://www.sjsu.edu/faculty/watkins/radio.htm
+        [5] https://en.wikipedia.org/wiki/History_of_mobile_phones
+        [6] https://en.wikipedia.org/wiki/History_of_the_Internet
+        [7] https://en.wikipedia.org/wiki/History_of_the_World_Wide_Web
+        [8] https://www.rbth.com/science_and_tech/2014/09/24/computers_in_the_ussr_a_story_of_missed_opportunities_40073.html
+    </div>
+
+    <h3> Our writeup goes here !</h3>
 
 </div>
 
@@ -253,7 +313,8 @@
         // const countryColorCode = {"United States": "pink", "China": "green", "India": "red", "Russia": "purple", "Japan": "blue", "Germany": "brown"};
 
         //global vars
-        let worldmap = d3.select("svg");
+        let worldmap = d3.select("#map-svg");
+        let legendSvg = d3.select("#legend-svg")
         let path = d3.geoPath();
         let techDisplayed;
         let yearDisplayed;
@@ -359,10 +420,10 @@
                   .domain([1,max/100000, max/10000, max/1000, max/100, max/10, max])
                   .range(["#1d1e38", "#333345", "#535359", "#a3a087", "#c4c19f", "#dddbab", "#fffede", "fff"]);
 
-              var legendSvg = d3.select("svg");
               legendSvg.append("g")
                 .attr("class", "legend")
-                .attr("transform", "translate(30,25)");
+                .style("position", "fixed")
+                .style("bottom", 0);
 
               var logLegend = d3.legendColor()
                   .cells([10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000, 1000000000])
