@@ -11,7 +11,7 @@
     body {
         margin: 0px auto;
         font-family: "JetBrains Mono",monospace;
-        font-size: 13pt;
+        font-size: 11pt;
         color: #e0e0e0;
     }
 
@@ -70,7 +70,7 @@
       width: 58%;
         top: 30px;
       height: 100%;
-      margin: 0px;
+      margin-left: 20px;
     }
 
     .a {
@@ -91,7 +91,7 @@
       float: right;
     }
 
-    #legend-svg{
+    #map-footer{
         display: inline-block;
         position: absolute;
         bottom: 0;
@@ -99,7 +99,18 @@
         width: 100%;
         float: right;
         background-color: #1d1e38;
-        max-height: 90px;
+        height: 90px;
+    }
+
+    #year-label{
+        float: left;
+        padding-bottom: 15px;
+    }
+
+    #legend-svg{
+        display: inline-block;
+        width: 100%;
+        float: right;
     }
 
     #sections {
@@ -255,7 +266,10 @@
     </div>
     <div id='map-container'>
         <svg id="map-svg"></svg>
-        <svg id="legend-svg"></svg>
+        <div id="map-footer">
+            <div id="year-label"></div> <br>
+            <svg id="legend-svg"></svg>
+        </div>
     </div>
 
 </div>
@@ -307,8 +321,9 @@
                            ["China", "Germany", "India", "Japan", "Russia", "United States"],
                            ["United States"],
                            ["China", "Germany", "India", "Japan", "Russia", "United States"]];
-        const yearSeq = [1995, 1877, 1990, 1927, 1927, 1920, 1983, 1983];
-        const techSeq = ["Cellphone","Telephone","Telephone","Telephone","Telephone", "Radio", "Radio", "Cellphone"];
+        const yearSeq = [1900, 1985, 1990, 1995, 1999];
+        const techSeq = ["Telephone","Radio","Cellphone","InternetUser","Population"];
+        const techSeqPlurals = ["Telephones","Radios","Cellphones","Internet Users","People"];
 
         // const countryColorCode = {"United States": "pink", "China": "green", "India": "red", "Russia": "purple", "Japan": "blue", "Germany": "brown"};
 
@@ -318,6 +333,7 @@
         let path = d3.geoPath();
         let techDisplayed;
         let yearDisplayed;
+        let techDisplayedPlural;
         let max;
         // tooltip interaction
         let tooltip = d3.select("#map-container")
@@ -381,13 +397,19 @@
 
             let fillCountries = function (sectionIndex){
                 techDisplayed = techSeq[sectionIndex].toString();
+                techDisplayedPlural = techSeqPlurals[sectionIndex].toString()
                 yearDisplayed = yearSeq[sectionIndex];
-                console.log(techDisplayed + " in " + yearDisplayed);
+                var labelStr = techDisplayedPlural + " in " + yearDisplayed
+                console.log(labelStr);
+
+                document.getElementById("year-label").innerHTML = labelStr
 
                 d3.queue()
                   .defer(d3.csv, "aggregation/Historical_Agg_Cleaned.csv", function(d){
                       max = Math.max(d[techDisplayed]);
-                      return { year : +d.Year, country_name : d.Country, Cellphone : +d.Cellphone, Internetuser: +d.Internetuser, Radio: +d.Radio, Telephone: +d.Telephone }
+                      return { year : +d.Year, country_name : d.Country, Cellphone : +d.Cellphone,
+                          InternetUsers: +d.Internetuser, Radio: +d.Radio, Telephone: +d.Telephone,
+                          Population: +d.Xlpopulation  }
                     },
                     function(data){
                       let dataFilteredByYear = data.filter(function(d) {
@@ -491,7 +513,7 @@
                   return tooltip
                     .style("top", mouseY + "px" )
                     .style("left",(d3.mouse(this)[0]-45)+"px")
-                    .html(d.properties["name"] + "<br/>" + "<h4>" + tooltipText + '<br/>' + techDisplayed + 's' + "</h4>")
+                    .html(d.properties["name"] + "<br/>" + "<h4>" + tooltipText + '<br/>' + techDisplayedPlural + "</h4>")
                     .style("visibility", "visible");})
 
 
