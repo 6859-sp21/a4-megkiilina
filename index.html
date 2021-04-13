@@ -361,22 +361,26 @@
         function ready(error, topo) {
             // D3 projections
             // https://sodocumentation.net/d3-js/topic/9001/d3-projections
-            let projection = d3.geoAlbers()
-                .scale(coord["scale"][0])
-                .center(coord["center"][0])
-                .rotate(coord["rotate"][0])
-                .parallels([65, 65])
-                .translate([width / 2, height / 2 + 50]);
+            let projection = d3.geoMercator()
+                .scale(width)
+                .rotate([0, 0])
+                .center([0, 0])
+                // .scale(width/8)
+                // .center(coord["center"][0])
+                // .rotate(coord["rotate"][0])
+                // // .parallels([65, 65])
+                // .translate([0, width/4]);
 
             let zoomExtent = function (sectionIndex) {
                 console.log(sectionIndex + 'th section active');
                 // if (sectionIndex === 0) return;
                 // if (sectionIndex >= countries.length) return;
-
-                projection.center(coord["center"][sectionIndex]);
-                projection.scale(coord["scale"][sectionIndex]);
-                projection.rotate(coord["rotate"][sectionIndex]);
-
+                //
+                // projection.center(coord["center"][sectionIndex]);
+                projection.scale(width/8);
+                projection.translate([width/2, height/2])
+                // projection.rotate(coord["rotate"][sectionIndex]);
+                //
                 d3.selectAll("path")
                     .transition("zoom")
                     .duration(2000)
