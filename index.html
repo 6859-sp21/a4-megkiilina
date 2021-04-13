@@ -13,6 +13,8 @@
         font-family: "JetBrains Mono",monospace;
         font-size: 11pt;
         color: #e0e0e0;
+
+        background-color: #1d1e38;
     }
 
     h1 {
@@ -111,6 +113,12 @@
         display: inline-block;
         width: 100%;
         float: right;
+    }
+
+
+    #citations {
+        font-size: 10px;
+        padding-top: 50px;
     }
 
     #sections {
@@ -259,9 +267,20 @@
             corroborate this guess, since it’s clear that the population of “Russia” dips after 1991.
             This dip is also apparent in the earlier graph about radio usage.
 
+            <div id="citations">
+                Citations:
+                [1] https://en.wikipedia.org/wiki/History_of_the_telephone
+                <p>
+                [2] http://oldtelephones.com/blog/2012/09/04/bells-telephone-in-germany/
+                <p>
+                [3] http://www.pbs.org/wgbh/aso/databank/entries/dt20ra.html
+                <p>[4] https://www.sjsu.edu/faculty/watkins/radio.htm
+                <p>[5] https://en.wikipedia.org/wiki/History_of_mobile_phones
+                <p>[6] https://en.wikipedia.org/wiki/History_of_the_Internet
+                <p>[7] https://en.wikipedia.org/wiki/History_of_the_World_Wide_Web
+                <p>[8] https://www.rbth.com/science_and_tech/2014/09/24/computers_in_the_ussr_a_story_of_missed_opportunities_40073.html
+            </div>
         </div>
-
-        <div>  </div> <!-- this is a placeholder to keep the graph in place -->
 
     </div>
     <div id='map-container'>
@@ -271,23 +290,8 @@
             <svg id="legend-svg"></svg>
         </div>
     </div>
-
 </div>
-<div id="endnotes">
-    <div id="citations">
-        [1] https://en.wikipedia.org/wiki/History_of_the_telephone
-        [2] http://oldtelephones.com/blog/2012/09/04/bells-telephone-in-germany/
-        [3] http://www.pbs.org/wgbh/aso/databank/entries/dt20ra.html
-        [4] https://www.sjsu.edu/faculty/watkins/radio.htm
-        [5] https://en.wikipedia.org/wiki/History_of_mobile_phones
-        [6] https://en.wikipedia.org/wiki/History_of_the_Internet
-        [7] https://en.wikipedia.org/wiki/History_of_the_World_Wide_Web
-        [8] https://www.rbth.com/science_and_tech/2014/09/24/computers_in_the_ussr_a_story_of_missed_opportunities_40073.html
-    </div>
 
-    <h3> Our writeup goes here !</h3>
-
-</div>
 
 
 <div style="height:300px"></div>
@@ -321,8 +325,8 @@
                            ["China", "Germany", "India", "Japan", "Russia", "United States"],
                            ["United States"],
                            ["China", "Germany", "India", "Japan", "Russia", "United States"]];
-        const yearSeq = [1900, 1900, 1985, 1990, 1995, 1999];
-        const techSeq = ["Telephone","Telephone","Radio","Cellphone","InternetUser","Population"];
+        const yearSeq = [1900, 1900, 1985, 1990, 1996, 1999];
+        const techSeq = ["Telephone","Telephone","Radio","Cellphone","Internetuser","Xlpopulation"];
         const techSeqPlurals = ["Telephones","Telephones","Radios","Cellphones","Internet Users","People"];
 
         // const countryColorCode = {"United States": "pink", "China": "green", "India": "red", "Russia": "purple", "Japan": "blue", "Germany": "brown"};
@@ -412,8 +416,8 @@
                   .defer(d3.csv, "aggregation/Historical_Agg_Cleaned.csv", function(d){
                       max = Math.max(d[techDisplayed]);
                       return { year : +d.Year, country_name : d.Country, Cellphone : +d.Cellphone,
-                          InternetUsers: +d.Internetuser, Radio: +d.Radio, Telephone: +d.Telephone,
-                          Population: +d.Xlpopulation  }
+                          Internetuser: +d.Internetuser, Radio: +d.Radio, Telephone: +d.Telephone,
+                          Xlpopulation: +d.Xlpopulation  }
                     },
                     function(data){
                       let dataFilteredByYear = data.filter(function(d) {
