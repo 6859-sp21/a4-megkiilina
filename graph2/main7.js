@@ -120,7 +120,7 @@ var dataset = d3.dsv(",", "Historical_Agg_Cleaned.csv", function(d) {
         .call(d3.axisBottom(x))
         .append('text')
           .attr('text-anchor', 'end')
-          .attr('fill', 'black')
+          .attr('fill', 'white')
           .attr('font-size', '12px')
           .attr('font-weight', 'bold')
           .attr('x', width - margin.right)
@@ -149,22 +149,22 @@ var dataset = d3.dsv(",", "Historical_Agg_Cleaned.csv", function(d) {
         .append('text')
             .attr('transform', `translate(20, ${margin.top}) rotate(-90)`)
             .attr('text-anchor', 'end')
-            .attr('fill', 'black')
+            .attr('fill', 'white')
             .attr('font-size', '12px')
             .attr('font-weight', 'bold')
             .text(function(d) {            
                 if (filtered_data == dataEvent_1){
-                   {return "telephone"}
+                   {return "Telephone"}
                 }else if (filtered_data == dataEvent_2){
-                  { return "radio"}
+                  { return "Radio"}
                 }else if (filtered_data == dataEvent_3){
-                  { return "cellphone"}
+                  { return "Cellphone"}
                 }else if (filtered_data == dataEvent_4){
-                  { return "internetuser"}
+                  { return "Internet Users"}
                 }else if (filtered_data == dataEvent_5){
                   { return "Population"}
                 }else if (filtered_data == dataEvent_5){
-                  { return "internetuser"}
+                  { return "Internet Users"}
                 };}); 
 
     //----------GDP Lines -----------------------------//
@@ -235,7 +235,7 @@ var dataset = d3.dsv(",", "Historical_Agg_Cleaned.csv", function(d) {
         .call(d3.axisBottom(x))
         .append('text')
           .attr('text-anchor', 'end')
-          .attr('fill', 'black')
+          .attr('fill', 'white')
           .attr('font-size', '12px')
           .attr('font-weight', 'bold')
           .attr('x', width - margin.right)
@@ -264,22 +264,22 @@ var dataset = d3.dsv(",", "Historical_Agg_Cleaned.csv", function(d) {
           .append('text')
               .attr('transform', `translate(20, ${margin.top}) rotate(-90)`)
               .attr('text-anchor', 'end')
-              .attr('fill', 'black')
+              .attr('fill', 'white')
               .attr('font-size', '12px')
               .attr('font-weight', 'bold')
               .text(function(d) {            
                   if (filtered_data == dataEvent_1){
-                     {return "telephone"}
+                     {return "Telephone"}
                   }else if (filtered_data == dataEvent_2){
-                    { return "radio"}
+                    { return "Radio"}
                   }else if (filtered_data == dataEvent_3){
-                    { return "cellphone"}
+                    { return "Cellphone"}
                   }else if (filtered_data == dataEvent_4){
-                    { return "internetuser"}
+                    { return "Internet Users"}
                   }else if (filtered_data == dataEvent_5){
                     { return "Population"}
                   }else if (filtered_data == dataEvent_5){
-                    { return "internetuser"}
+                    { return "Internet Users"}
                   };});    
 
     //----------LINES -----------------------------//
