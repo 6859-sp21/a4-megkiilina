@@ -349,7 +349,7 @@
                            ["China", "Germany", "India", "Japan", "Russia", "United States"]];
         const yearSeq = [1900, 1900, 1985, 1990, 1996, 1999];
         const techSeq = ["Telephone","Telephone","Radio","Cellphone","Internetuser","Xlpopulation"];
-        const techSeqPlurals = ["Telephones","Telephones","Radios","Cellphones","Internet Users","People"];
+        const techSeqPlurals = ["Telephones","Telephones","Radios","Cellphones","Internet Users","Population"];
 
         // const countryColorCode = {"United States": "pink", "China": "green", "India": "red", "Russia": "purple", "Japan": "blue", "Germany": "brown"};
 
@@ -419,15 +419,15 @@
                         }
                       } else if (gdpView === true) {
                         // max = Math.max(d[techDisplayed])/Math.max(d["Xlrealgdp"]);
-                        max = 20;
+                        max = 10;
                         if (techDisplayed === "Radio"){
-                          max = .2;
+                          max = 1;
                         }
                       }
 
                       return { year : +d.Year, country_name : d.Country, Cellphone : +d.Cellphone,
                           Internetuser: +d.Internetuser, Radio: +d.Radio, Telephone: +d.Telephone,
-                          gdp: +d.Xlrealgdp, Xlpopulation: +d.Xlpopulation }
+                          gdp: +d.Xlrealgdp, Xlpopulation: 1000 * +d.Xlpopulation }
                     },
                     function(data){
                       let dataFilteredByYear = data.filter(function(d) {
@@ -450,7 +450,7 @@
                             .range(["#1d1e38", "#333345", "#535359", "#a3a087", "#c4c19f", "#dddbab", "#fffede"])
                       } else if (gdpView === true) {
                         colorScale = d3.scaleThreshold()
-                            .domain([1, max/2000, max/200, max/20, max/2, max])
+                            .domain([1, max/10000, max/1000, max/100, max/10, max])
                             .range(["#1d1e38", "#302e3b", "#4b443f", "#6e6044", "#b1964e", "#ecc757", "#ffd75a"])
                       }
 
@@ -475,20 +475,20 @@
                 if (techDisplayed === "Radio"){
                   max = 1000000;
                 }
-                domainArray = [max/1000000, max/100000, max/10000, max/1000, max/100, max/10, max];
+                domainArray = [max/100000, max/10000, max/1000, max/100, max/10, max];
                 legendScale = d3.scaleLog()
                   .domain(domainArray)
-                  .range(["#1d1e38", "#333345", "#535359", "#a3a087", "#c4c19f", "#dddbab", "#fffede", "fff"]);
+                  .range(["#333345", "#535359", "#a3a087", "#c4c19f", "#dddbab", "#fffede", "fff"]);
               } else if (gdpView === true) {
                 // max = Math.max(d[techDisplayed])/Math.max(d["Xlrealgdp"]);
-                max = 20;
+                max = 10;
                 if (techDisplayed === "Radio"){
-                  max = 2;
+                  max = 1;
                 }
-                domainArray = [max/200000, max/20000, max/2000, max/200, max/20, max/2, max];
+                domainArray = [max/100000, max/10000, max/1000, max/100, max/10, max];
                 legendScale = d3.scaleLog()
                   .domain(domainArray)
-                  .range(["#1d1e38", "#302e3b", "#4b443f", "#6e6044", "#b1964e", "#ecc757", "#ffd75a", "fff"]);
+                  .range(["#302e3b", "#4b443f", "#6e6044", "#b1964e", "#ecc757", "#ffd75a", "fff"]);
               }
 
               legendSvg.append("g")
@@ -504,14 +504,14 @@
                   .orient("horizontal")
                   .scale(legendScale);
               if (gdpView === false) {
-                logLegend.labels(['1K', '10K', '100K', '1M', '10M', '100M', '1B']);
+                logLegend.labels([ '10K', '100K', '1M', '10M', '100M', '1B']);
                 if (techDisplayed === "Radio"){
-                  logLegend.labels(['1', '10', '100', '1K', '10K', '100K', '1M']);
+                  logLegend.labels(['10', '100', '1K', '10K', '100K', '1M']);
                 }
               } else if (gdpView === true) {
-                logLegend.labels(['e-4', 'e-3', 'e-2', 'e-1', '1', '10', '20']);
+                logLegend.labels([ 'e-4', 'e-3', 'e-2', 'e-1', '1', '10']);
                 if (techDisplayed === "Radio"){
-                  logLegend.labels(['e-6', 'e-5', 'e-4', 'e-3', 'e-2', 'e-1', '.2']);
+                  logLegend.labels([ 'e-5', 'e-4', 'e-3', 'e-2', 'e-1', '1']);
                 }
               }
               legendSvg.select(".legend")
