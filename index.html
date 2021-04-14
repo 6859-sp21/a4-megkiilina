@@ -106,7 +106,10 @@
     #map-toggle{
         float: left;
         margin-left: 20px;
-        background-color: lightgrey;
+        background-color: #2d2e98;
+        color: lightgrey;
+        border: solid 1px grey;
+        font: inherit;
     }
 
     #year-label{
@@ -214,6 +217,11 @@
           <p></p>
           By 1900, the USA led the world in adopting telephones with 1.3 million telephones by,
           while Germany came in second with 306,000.
+          <p></p>
+          <span style="background-color:#2d2e98">
+          <i>Click on "Switch to GDP ratio view" to see which countries have a large number of telephones relative
+          to their GDPs.</i>
+          </span>
       </div>
 
       <div>
@@ -298,7 +306,7 @@
         <svg id="map-svg"></svg>
         <div id="map-footer">
             <div id="year-label"></div>
-            <button id="map-toggle" onclick="toggleGDP()">switch to GDP Ratio view</button><br>
+            <button id="map-toggle" onclick="toggleGDP()">Switch to GDP Ratio view</button><br>
             <svg id="legend-svg"></svg>
         </div>
     </div>
