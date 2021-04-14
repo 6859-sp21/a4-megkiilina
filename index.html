@@ -20,7 +20,7 @@
     h1 {
         margin-top: 100px;
         margin-bottom:100px;
-        font-size: 36pt;
+        font-size: 40pt;
         text-decoration: underline;
         text-decoration-style: dotted;
         text-decoration-color: #535359;
@@ -68,9 +68,8 @@
       font-size: 10pt;
       font-weight: bolder;
       text-align: center;
-      right: 30px;
-      width: 58%;
-        top: 30px;
+      right: 0px;
+      width: 65%;
       height: 100%;
       margin-left: 20px;
     }
@@ -124,7 +123,7 @@
     }
 
     #sections {
-        width: 35%;
+        width: 30%;
         left: 0px;
         padding-left: 2em;
         padding-right: 2em;
@@ -183,7 +182,7 @@
             Scroll on to see how these trends manifest throughout communications technology in the 20th century.
         </div><br>
 
-        <div style="font-size: 9pt; font-style: italic;">
+        <div style="color: grey; font-size: 9pt; font-style: italic;">
             All y-axes are log scale and describe the total number of devices in a given country in a particular year.
             We chose not to do technology per capita, because the rate of technology acquisition is not related to
             a country’s population.
@@ -201,7 +200,7 @@
       </div>
 
       <div>
-          <h2>Tele-<br>phone</h2>
+          <h2>TELE-<br>PHONE</h2>
           <h3>1876: Invention of the Telephone</h3>
           1876 saw the invention of the telephone by Alexander Graham Bell in Boston, USA, which other countries soon
           rushed to replicate [1]. The most successful countries of the century in telephone acquisition were the USA
@@ -212,7 +211,7 @@
       </div>
 
       <div>
-          <h2>Radio</h2>
+          <h2>RADIO</h2>
           <h3>1920: First commercial radio broadcast</h3>
           On November 2, 1920, the radio station KDKA in Pittsburgh, USA made the first ever commercial radio
           broadcast. [3] Decades prior, the Italian inventor Gugliermo Marconi had demonstrated radio communication
@@ -225,7 +224,7 @@
           40,800 radios, followed by Germany with 9,575, Russia with 5,624, and Japan with 4,166.
       </div>
       <div>
-          <h2>Cell-<br>phone</h2>
+          <h2>CELL-<br>PHONE</h2>
           <h3>1983: First commercially available cellular phone</h3>
           Though the world’s first cellular network had already been launched in Japan by Nippon Telegraph and
           Telephone in 1979, it was not until 1983 when commercial cellular phone communication became available.
@@ -236,7 +235,7 @@
           though Germany is quick to catch up by 1986.
       </div>
       <div>
-          <h2>Internet</h2>
+          <h2>INTERNET</h2>
           <h3>1989: Invention of the World Wide Web</h3>
           The World Wide Web was invented in 1989 by Sir Tim Berners-Lee, an English contractor at CERN in
           Switzerland. Berners-Lee, in particular, was the first to use computer networking technologies and markup
@@ -252,7 +251,7 @@
       </div>
 
       <div>
-          <h2>Note:</h2>
+          <h2>NOTE:</h2>
           <h3>1991: Fall of the Soviet Union</h3>
           A noticeable quirk in the dataset is related to the fall of the Soviet Union in 1991. On a
           significant number of technologies, Russia (considered to be the same bucket as the Soviet Union
@@ -363,9 +362,9 @@
             // D3 projections
             // https://sodocumentation.net/d3-js/topic/9001/d3-projections
             let projection = d3.geoMercator()
-                .scale(width/6)
+                .scale(width/7)
                 .rotate([0, 0])
-                .center([20, 60])
+                .center([0, 65])
 
             let fillCountries = function (sectionIndex, gdpView){
                 techDisplayed = techSeq[sectionIndex].toString();
@@ -468,7 +467,6 @@
             }
 
             let mouseOver = function (d) {
-                if(d3.active("zoom")) return;
                 d3.selectAll(".Country")
                     .style("opacity", .5)
                 d3.select(this)
@@ -482,7 +480,6 @@
             }
 
             let mouseLeave = function (d) {
-                if(d3.active("zoom")) return;
                 d3.selectAll(".Country")
                     .attr('stroke-width', .5)
                     .style("opacity", 1)
@@ -529,7 +526,7 @@
                     return tooltip
                       .style("top", mouseY + "px" )
                       .style("left",(d3.mouse(this)[0]-45)+"px")
-                      .html(d.properties["name"] + "<br/>" + "<h4>" + tooltipText + '<br/>' + techDisplayedPlural + '<br/>' + "per GDP" + "</h4>")
+                      .html(d.properties["name"] + "<br/>" + "<h4>" + tooltipText + '<br/>' + techDisplayedPlural + '/' + "GDP" + "</h4>")
                       .style("visibility", "visible");
                   }})
 
