@@ -283,6 +283,7 @@
     <div id='map-container'>
         <svg id="map-svg"></svg>
         <div id="map-footer">
+            <button id="map-toggle" onclick="toggleGDP()">switch to tech:GDP view</button>
             <div id="year-label"></div> <br>
             <svg id="legend-svg"></svg>
         </div>
@@ -301,6 +302,13 @@
 <script>
 
     var oldWidth = 0
+    var gdpView = false
+
+    function toggleGDP() {
+        gdpView = !gdpView;
+        document.getElementById("map-toggle").innerText = "switch to " + (gdpView ? "tech view" : "tech:GDP view")
+        console.log("toggled GDP view to " + gdp)
+    }
 
     function render() {
         if (oldWidth == innerWidth) return
