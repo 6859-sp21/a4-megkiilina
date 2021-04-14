@@ -104,6 +104,12 @@
         height: 90px;
     }
 
+    #map-toggle{
+        float: left;
+        margin-left: 20px;
+        background-color: lightgrey;
+    }
+
     #year-label{
         float: left;
         padding-bottom: 15px;
@@ -283,8 +289,8 @@
     <div id='map-container'>
         <svg id="map-svg"></svg>
         <div id="map-footer">
-            <button id="map-toggle" onclick="toggleGDP()">switch to tech:GDP view</button>
-            <div id="year-label"></div> <br>
+            <div id="year-label"></div>
+            <button id="map-toggle" onclick="toggleGDP()">switch to GDP Ratio view</button><br>
             <svg id="legend-svg"></svg>
         </div>
     </div>
@@ -303,10 +309,13 @@
 
     var oldWidth = 0
     var gdpView = false
+    var toggleEvent = new Event("toggle")
+    var currentSection = 0
 
     function toggleGDP() {
         gdpView = !gdpView;
-        document.getElementById("map-toggle").innerText = "switch to " + (gdpView ? "tech view" : "tech:GDP view")
+        document.getElementById("map-toggle").innerText = "Switch to " + (gdpView ? "Technology view" : "GDP Ratio view")
+        d3.select("#map-svg").node().dispatchEvent(toggleEvent)
         console.log("toggled GDP view to " + gdpView)
     }
 
@@ -336,6 +345,7 @@
         let yearDisplayed;
         let techDisplayedPlural;
         let max;
+
 
         let tooltip = d3.select("#map-container")
           .append("div")
@@ -368,10 +378,17 @@
                 .center([20, 60])
 
             let fillCountries = function (sectionIndex, gdpView){
+                currentSection = sectionIndex
+                console.log("currentSection = " + currentSection)
                 techDisplayed = techSeq[sectionIndex].toString();
                 techDisplayedPlural = techSeqPlurals[sectionIndex].toString()
                 yearDisplayed = yearSeq[sectionIndex];
-                var labelStr = techDisplayedPlural + " in " + yearDisplayed
+                let labelStr;
+                if (gdpView) {
+                    labelStr = "Ratio of " + techDisplayedPlural + " to GDP in " + yearDisplayed;
+                } else {
+                    labelStr = techDisplayedPlural + " in " + yearDisplayed;
+                }
                 console.log(labelStr);
 
                 document.getElementById("year-label").innerHTML = labelStr
@@ -541,6 +558,11 @@
             .eventId('mapId') // namespace for events
             .sections(d3.selectAll('.container-1 #sections > div'))
             .on("active", function(i) { fillCountries(i, gdpView), createLegend(gdpView) })
+
+            var toggleHandler = d3.select("#map-svg").on("toggle", function(i) {
+                fillCountries(currentSection, gdpView)
+                createLegend(gdpView)
+            })
 
         }
 
