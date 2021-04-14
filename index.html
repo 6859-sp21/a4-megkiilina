@@ -414,9 +414,15 @@
                       if (gdpView === false) {
                         // max = Math.max(d[techDisplayed]);
                         max = 1000000000;
+                        if (techDisplayed === "Radio"){
+                          max = 1000000;
+                        }
                       } else if (gdpView === true) {
                         // max = Math.max(d[techDisplayed])/Math.max(d["Xlrealgdp"]);
                         max = 20;
+                        if (techDisplayed === "Radio"){
+                          max = .2;
+                        }
                       }
 
                       return { year : +d.Year, country_name : d.Country, Cellphone : +d.Cellphone,
@@ -440,7 +446,7 @@
                       console.log(colorEncoding);
                       if (gdpView === false) {
                         colorScale = d3.scaleThreshold()
-                            .domain([1, max/5000, max/500, max/50, max/5, max])
+                            .domain([1, max/10000, max/1000, max/100, max/10, max])
                             .range(["#1d1e38", "#333345", "#535359", "#a3a087", "#c4c19f", "#dddbab", "#fffede"])
                       } else if (gdpView === true) {
                         colorScale = d3.scaleThreshold()
@@ -459,12 +465,16 @@
 
             }
 
-            let createLegend = function(gdpView) {
+            let createLegend = function(sectionIndex, gdpView) {
               // https://d3-legend.susielu.com/#color-examples
               let domainArray, legendScale;
+              techDisplayed = techSeq[sectionIndex].toString();
               if (gdpView === false) {
                 // max = Math.max(d[techDisplayed]);
                 max = 1000000000;
+                if (techDisplayed === "Radio"){
+                  max = 1000000;
+                }
                 domainArray = [max/1000000, max/100000, max/10000, max/1000, max/100, max/10, max];
                 legendScale = d3.scaleLog()
                   .domain(domainArray)
@@ -472,7 +482,10 @@
               } else if (gdpView === true) {
                 // max = Math.max(d[techDisplayed])/Math.max(d["Xlrealgdp"]);
                 max = 20;
-                domainArray = [max/1000000, max/100000, max/10000, max/1000, max/100, max/10, max];
+                if (techDisplayed === "Radio"){
+                  max = 2;
+                }
+                domainArray = [max/200000, max/20000, max/2000, max/200, max/20, max/2, max];
                 legendScale = d3.scaleLog()
                   .domain(domainArray)
                   .range(["#1d1e38", "#302e3b", "#4b443f", "#6e6044", "#b1964e", "#ecc757", "#ffd75a", "fff"]);
@@ -492,8 +505,14 @@
                   .scale(legendScale);
               if (gdpView === false) {
                 logLegend.labels(['1K', '10K', '100K', '1M', '10M', '100M', '1B']);
+                if (techDisplayed === "Radio"){
+                  logLegend.labels(['1', '10', '100', '1K', '10K', '100K', '1M']);
+                }
               } else if (gdpView === true) {
-                logLegend.labels(['e-5', 'e-4', 'e-3', 'e-2', 'e-1', '1', '10']);
+                logLegend.labels(['e-4', 'e-3', 'e-2', 'e-1', '1', '10', '20']);
+                if (techDisplayed === "Radio"){
+                  logLegend.labels(['e-6', 'e-5', 'e-4', 'e-3', 'e-2', 'e-1', '.2']);
+                }
               }
               legendSvg.select(".legend")
                 .call(logLegend);
@@ -571,11 +590,11 @@
             .graph(d3.selectAll('#map-container'))
             .eventId('mapId') // namespace for events
             .sections(d3.selectAll('.container-1 #sections > div'))
-            .on("active", function(i) { fillCountries(i, gdpView), createLegend(gdpView) })
+            .on("active", function(i) { fillCountries(i, gdpView), createLegend(i, gdpView) })
 
             var toggleHandler = d3.select("#map-svg").on("toggle", function(i) {
                 fillCountries(currentSection, gdpView)
-                createLegend(gdpView)
+                createLegend(currentSection, gdpView)
             })
 
         }
