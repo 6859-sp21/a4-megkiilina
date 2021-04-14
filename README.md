@@ -3,7 +3,7 @@ a4-megkiilina created by GitHub Classroom
 ## See the site at https://6859-sp21.github.io/a4-megkiilina/
 
 ## Writeup:
-Our group “megkiilina” created a visualization based on the Cross-country Historical Adoption of Technology (CHAT) dataset, found here with discussion here.
+Our group “megkiilina” created a visualization based on the Cross-country Historical Adoption of Technology (CHAT) dataset, found [here](https://github.com/datasets/historical-adoption-of-technology) with discussion [here](https://www.nber.org/system/files/working_papers/w15319/w15319.pdf).
 Note: our team was Kii Kang, Megan Prakash, and Elina Oikonomaki, but Kii and Megan are submitting separately from Elina. Kii and Megan’s version is at [index.html](https://6859-sp21.github.io/a4-megkiilina/), and Elina’s version will be at main:elina/index_elina.html, containing line graphs that she completed after Kii and Megan submitted.
 
 ### About the dataset
