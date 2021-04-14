@@ -5,7 +5,7 @@ a4-megkiilina created by GitHub Classroom
 ## Writeup:
 Our group “megkiilina” created a visualization based on the Cross-country Historical Adoption of Technology (CHAT) dataset, found [here](https://github.com/datasets/historical-adoption-of-technology) with discussion [here](https://www.nber.org/system/files/working_papers/w15319/w15319.pdf).
 
-*Note*: our team was Kii Kang, Megan Prakash, and Elina Oikonomaki, but Kii and Megan are submitting separately from Elina. Kii and Megan’s version is at [index.html](https://6859-sp21.github.io/a4-megkiilina/), and Elina’s version will be at main:elina/index_elina.html, containing line graphs that she completed after Kii and Megan submitted.
+*Note*: our team was Kii Kang, Megan Prakash, and Elina Oikonomaki, but Kii and Megan are submitting separately from Elina. Kii and Megan’s version is at [index.html](https://6859-sp21.github.io/a4-megkiilina/), and Elina’s version will be at main:elina/index_elina.html, since she wasn't able to complete the line graphs in time for Kii and Megan to submit.
 
 ### About the dataset
 The dataset includes over 100 technologies in its collection, but many of the technologies have very sparse data across all the countries and years. We decided to focus on communications inventions because it seemed to follow naturally from thinking about worldwide adoption of technology, plus the data for 20th century communications inventions was some of the most dense available in the CHAT dataset.
