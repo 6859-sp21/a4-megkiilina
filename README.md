@@ -19,7 +19,9 @@ Our webpage is divided into two columns, left containing a continuous stream of 
 
 ### Work Distribution
 Kii - Web design/development, map development, interaction design/development
+
 Megan - Web design/development, content curation, data exploration
-Elina* - Graph design/development
+
+Elina* - Graph design/development (in a separate submission instead of the main submission at our GitHub Pages link)
 
 We chose the dataset, ideated, and discussed the site design as a group, which took about 4 hours total including our individual work time. Then, we split up to do the development work and each chose sections to implement. Our development work was done as above, and took about 20 hours each. The aspect that took the most time was learning to work with D3 and constructing our visualizations -- it surprised us how long it took to deal with bugs and how to get everything to draw correctly when we were creating our customized designs. This time factor combined with our respective intense workloads was the most difficult part of completing this assignment.
